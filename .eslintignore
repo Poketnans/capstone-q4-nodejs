@@ -1,0 +1,10 @@
+node_modules/
+build/
+.env
+src/migrations
+jest.config.ts
+
+# -- DBeaver --
+.dbeaver/
+Scripts/
+.project

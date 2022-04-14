@@ -1,0 +1,11 @@
+node_modules/
+build/
+.env
+src/migrations
+jest.config.ts
+docker-compose.yml
+
+# -- DBeaver --
+.dbeaver/
+Scripts/
+.project
