@@ -1,8 +1,6 @@
+.idea/
+.vscode/
 node_modules/
 build/
-.env
-
-# -- DBeaver --
-.dbeaver/
-Scripts/
-.project
+tmp/
+temp/

@@ -1,0 +1,33 @@
+import dotenv from "dotenv";
+import path from "path";
+import { ConnectionOptions } from "typeorm";
+
+dotenv.config();
+
+const devConfig = {
+  "type": "postgres",
+  "url": process.env.DB_URI_DEV,
+  "logging": false,
+  "entities": [`${path.join(__dirname,'../entities/**/*.*')}`],
+  "migrations": [`${path.join(__dirname,'../migrations/**/*.*')}`],
+  "cli": {
+    "entitiesDir": path.join(__dirname,'../entities'),
+    "migrationsDir": path.join(__dirname,'../migrations'),
+  }
+} as ConnectionOptions;
+
+const prodConfig = {
+  "type": "postgres",
+  "url": process.env.DB_URI_PROD,
+  "logging": false,
+  "ssl": { rejectUnauthorized: false },
+  "entities": [`${path.join(__dirname,'../entities/**/*.*')}`],
+  "migrations": [`${path.join(__dirname,'../migrations/**/*.*')}`],
+  "cli": {
+    "entitiesDir": path.join(__dirname,'../entities'),
+    "migrationsDir": path.join(__dirname,'../migrations'),
+    "subscribersDir": "src/subscriber"
+  }
+} as ConnectionOptions;
+
+export default process.env.NODE_ENV === "production" ? prodConfig : devConfig;
