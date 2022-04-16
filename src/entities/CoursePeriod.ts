@@ -15,6 +15,6 @@ export default class CoursePeriod {
   @Column({ length: 10 })
   name: string;
 
-  @OneToMany(() => Courses, (course) => course.id)
+  @OneToMany(() => Courses, (course) => course.period)
   course_list: Courses [];
 }
