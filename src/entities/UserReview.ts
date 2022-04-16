@@ -11,7 +11,7 @@ import {
 @Entity("users_review")
 export default class Review {
   @PrimaryGeneratedColumn("uuid")
-  id: number;
+  id: string;
 
   @Column({ length: 280 })
   comment: string;
@@ -23,9 +23,9 @@ export default class Review {
   hash_user_course: string;
 
   @ManyToOne(() => Courses, (course) => course.idCourse)
-  course: Courses;
+  id_course: Courses;
 
   @ManyToOne(() => User, (oneUser) => oneUser.idUser)
-  user: User;
+  id_user: User;
 
 }
