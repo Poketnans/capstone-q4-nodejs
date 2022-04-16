@@ -1,4 +1,4 @@
-import { Courses } from "./Courses";
+import { Course } from "./Course";
 
 import {
   Entity,
@@ -10,11 +10,11 @@ import {
 @Entity("courses_period")
 export default class CoursePeriod {
   @PrimaryGeneratedColumn("uuid")
-  id: number;
+  id: string;
 
-  @Column({ length: 10 })
+  @Column({ length: 10 , unique: true})
   name: string;
 
-  @OneToMany(() => Courses, (course) => course.period)
-  course_list: Courses [];
+  @OneToMany(() => Course, (oneCourse) => oneCourse.period)
+  course_list: Course [];
 }
