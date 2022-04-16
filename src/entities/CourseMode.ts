@@ -1,4 +1,4 @@
-import { Courses } from "./Courses";
+import { Course } from "./Course";
 
 import {
   Entity,
@@ -15,7 +15,7 @@ export default class CourseMode {
   @Column({ length: 10 })
   name: string;
 
-  @OneToMany(() => Courses, (course) => course.id)
-  course_list: Courses [];
+  @OneToMany(() => Course, (oneCourse) => oneCourse.mode)
+  course_list: Course [];
 
 }
