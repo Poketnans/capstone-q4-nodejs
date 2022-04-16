@@ -1,4 +1,4 @@
-import { Courses } from "./Courses";
+import { Course } from "./Course";
 import { User } from "./Users";
 
 import {
@@ -22,7 +22,7 @@ export default class Review {
   @Column({unique: true })
   hash_user_course: string;
 
-  @ManyToOne(() => Courses, (course) => course.reviews)
+  @ManyToOne(() => Course, (oneCourse) => oneCourse.reviews)
   id_course: Courses;
 
   @ManyToOne(() => User, (oneUser) => oneUser.reviews)
