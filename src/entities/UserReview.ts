@@ -22,10 +22,10 @@ export default class Review {
   @Column({unique: true })
   hash_user_course: string;
 
-  @ManyToOne(() => Courses, (course) => course.idCourse)
+  @ManyToOne(() => Courses, (course) => course.reviews)
   id_course: Courses;
 
-  @ManyToOne(() => User, (oneUser) => oneUser.idUser)
+  @ManyToOne(() => User, (oneUser) => oneUser.reviews)
   id_user: User;
 
 }
