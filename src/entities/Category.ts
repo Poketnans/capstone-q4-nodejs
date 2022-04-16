@@ -16,12 +16,12 @@ export default class Category {
   @Column({ length: 50, unique: true  })
   name: string;
 
-  @OneToMany(() => Course, (course) => course.id_category , {
+  @OneToMany(() => Course, (oneCourse) => oneCourse.id_category , {
 	  eager: true
   })
   course_list: Course[];
 
-  @OneToMany(() => Project, (project) => project.id , {
+  @OneToMany(() => Project, (oneProject) => oneProject.id , {
 	eager: true
   })
   project_list: Project[];
