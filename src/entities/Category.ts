@@ -1,5 +1,5 @@
-import  Projects  from "./Projects";
-import  Courses  from "./Courses";
+import  Project  from "./Project";
+import  Course  from "./Course";
 
 import {
   Entity,
@@ -13,17 +13,17 @@ export default class Category {
   @PrimaryGeneratedColumn("uuid")
   id: number;
 
-  @Column({ unique: true })
+  @Column({ length: 50, unique: true  })
   name: string;
 
-  @OneToMany(() => Courses, (oneCourse) => oneCourse.id , {
+  @OneToMany(() => Course, (course) => course.id_category , {
 	  eager: true
   })
-  course_list: Courses[];
+  course_list: Course[];
 
-  @OneToMany(() => Projects, (oneProject) => oneProject.id , {
+  @OneToMany(() => Project, (project) => project.id , {
 	eager: true
   })
-  project_list: Projects[];
+  project_list: Project[];
 
 }
