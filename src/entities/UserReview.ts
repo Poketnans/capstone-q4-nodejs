@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
+  JoinColumn,
 } from "typeorm";
 
 @Entity("courses_review")
@@ -23,9 +24,17 @@ export default class CourseReview {
   hash_user_course: string;
 
   @ManyToOne(() => Course)
-  id_course: Course[] ;
+  @JoinColumn({
+        name: "id_course",
+        referencedColumnName: "id",
+    })
+  course: Course
 
-  @ManyToOne(() => User, (oneUser) => oneUser.idUser)
-  id_user: User[];
 
+  @ManyToOne(() => User, (oneUser) => oneUser.id_user)
+  @JoinColumn({
+        name: "id_user",
+        referencedColumnName: "id",
+    })
+  user: User
 }
