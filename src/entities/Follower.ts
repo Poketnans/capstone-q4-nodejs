@@ -1,15 +1,17 @@
 /* eslint-disable import/no-cycle */
-import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import User from './Users';
+import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
+import User from "./Users";
 
-@Entity('followers')
+@Entity("followers")
 export default class Follower {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @ManyToOne(() => User, (user) => user.following)
-  idFollower: string;
+  @ManyToOne(() => User)
+  @JoinColumn({ name: "id_follower", referencedColumnName: "id" })
+  follower: User;
 
-  @ManyToOne(() => User, (user) => user.followers)
-  idTarget: string;
+  @ManyToOne(() => User)
+  @JoinColumn({ name: "id_following", referencedColumnName: "id" })
+  target: User;
 }
