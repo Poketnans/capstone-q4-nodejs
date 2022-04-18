@@ -10,15 +10,15 @@ import {
   JoinColumn,
   ManyToMany,
   JoinTable,
-} from 'typeorm';
-import Course from './Course';
-import Follower from './Follower';
-import Image from './Image';
-import Project from './Project';
+} from "typeorm";
+import Course from "./Courses";
+import Follower from "./Followers";
+import Image from "./Images";
+import Project from "./Projects";
 
-@Entity('users')
+@Entity("users")
 export default class User {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column({ length: 50 })
@@ -39,23 +39,23 @@ export default class User {
   @Column()
   employed: boolean;
 
-  @ManyToMany(() => Project, (project) => project.contributors, {
+  @ManyToMany(() => Project, {
     eager: true,
   })
   @JoinTable({
-    name: 'user_projects',
+    name: "user_projects",
     joinColumn: {
-      name: 'id_user',
-      referencedColumnName: 'id',
+      name: "id_user",
+      referencedColumnName: "id",
     },
     inverseJoinColumn: {
-      name: 'id_project',
-      referencedColumnName: 'id',
+      name: "id_project",
+      referencedColumnName: "id",
     },
   })
   projects_participated_in: Project[];
 
-  @OneToMany(() => Project, (project) => project.id_user_owner, {
+  @OneToMany(() => Project, (project) => project.user_owner, {
     eager: true,
   })
   own_projects: Project[];
@@ -70,18 +70,18 @@ export default class User {
   })
   following: Follower[];
 
-  @ManyToMany(() => Course, (course) => course.id, {
+  @ManyToMany(() => Course, {
     eager: true,
   })
   @JoinTable({
-    name: 'users_courses',
+    name: "users_courses",
     joinColumn: {
-      name: 'id_user',
-      referencedColumnName: 'id',
+      name: "id_user",
+      referencedColumnName: "id",
     },
     inverseJoinColumn: {
-      name: 'id_course',
-      referencedColumnName: 'id',
+      name: "id_course",
+      referencedColumnName: "id",
     },
   })
   courses: [];
@@ -91,9 +91,9 @@ export default class User {
   })
   owned_courses: Course[];
 
-  @OneToOne(() => Image, (image) => image.id, {
+  @OneToOne(() => Image, {
     eager: true,
   })
-  @JoinColumn({ name: 'id_image' })
-  id_image: string;
+  @JoinColumn({ name: "id_image", referencedColumnName: "id" })
+  id_image: Image;
 }
