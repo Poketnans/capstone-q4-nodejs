@@ -6,12 +6,13 @@ import {
   CreateDateColumn,
   ManyToOne,
   ManyToMany,
-} from 'typeorm';
-import User from './Users';
+} from "typeorm";
+import User from "./Users";
+import Category from "./Category";
 
-@Entity('projects')
+@Entity("projects")
 export default class Project {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column({ length: 50, unique: true })
@@ -34,4 +35,7 @@ export default class Project {
 
   @ManyToMany(() => User, (user) => user.projects_participated_in)
   contributors: User[];
+
+  @ManyToOne(() => Category, (category) => category.id)
+  id_category: Category;
 }
