@@ -1,5 +1,5 @@
-import { Courses } from "./Courses";
-import { User } from "./Users";
+import { Course } from "./Course";
+import { User } from "./User";
 
 import {
   Entity,
@@ -8,10 +8,10 @@ import {
   ManyToOne,
 } from "typeorm";
 
-@Entity("users_review")
-export default class Review {
+@Entity("courses_review")
+export default class CourseReview {
   @PrimaryGeneratedColumn("uuid")
-  id: number;
+  id: string;
 
   @Column({ length: 280 })
   comment: string;
@@ -19,13 +19,13 @@ export default class Review {
   @Column({type : "integer"})
   rating: number ;
 
-  @Column({unique: true })
+  @Column({ unique: true })
   hash_user_course: string;
 
-  @ManyToOne(() => Courses, (course) => course.idCourse)
-  course: Courses;
+  @ManyToOne(() => Course)
+  id_course: Course[] ;
 
   @ManyToOne(() => User, (oneUser) => oneUser.idUser)
-  user: User;
+  id_user: User[];
 
 }
