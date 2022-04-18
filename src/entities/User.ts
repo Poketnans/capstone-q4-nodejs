@@ -95,5 +95,5 @@ export default class User {
     eager: true,
   })
   @JoinColumn({ name: "id_image", referencedColumnName: "id" })
-  id_image: Image;
+  image: Image;
 }
