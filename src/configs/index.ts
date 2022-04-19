@@ -8,8 +8,8 @@ interface JWTConfig {
 }
 
 const jwtConfig: JWTConfig = {
-  secretKey: process.env.SECRET_KEY,
-  expiresIn: process.env.EXPIRES_IN,
+  secretKey: process.env.SECRET_KEY || "",
+  expiresIn: process.env.EXPIRES_IN || "24h"
 };
 
 export default jwtConfig;
