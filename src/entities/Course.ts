@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,16 +7,17 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
-} from 'typeorm';
-import Category from './Category';
-import CourseMode from './CourseMode';
-import CoursePeriod from './CoursePeriod';
-import Review from './UserReview';
-import User from './Users';
+  JoinColumn,
+} from "typeorm";
+import Category from "./Category";
+import CourseMode from "./CourseMode";
+import CoursePeriod from "./CoursePeriod";
+import Review from "./UserReview";
+import User from "./Users";
 
-@Entity('courses')
+@Entity("courses")
 export default class Course {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column({ length: 50, unique: true })
@@ -42,17 +44,22 @@ export default class Course {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => User, (user) => user.owned_courses)
-  id_user_owner: string;
+  @ManyToOne(() => User)
+  @JoinColumn({
+    name: "id_owner_course",
+    referencedColumnName: "id",
+  })
+  user_owner: User[];
 
   @OneToMany(() => CourseMode, (courseMode) => courseMode.id)
-  id_mode: CourseMode;
+  id_mode: string;
 
   @OneToMany(() => CoursePeriod, (coursePeriod) => coursePeriod.id)
-  id_period: CoursePeriod;
+  id_period: string;
 
-  @ManyToOne(() => Category, (category) => category.id)
-  id_category: Category[];
+  @ManyToOne(() => Category)
+  @JoinColumn({ name: "id_category", referencedColumnName: "id" })
+  category: Category[];
 
   @OneToMany(() => Review, (userReview) => userReview.id_course)
   reviews: [];
