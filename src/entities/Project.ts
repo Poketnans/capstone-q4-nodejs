@@ -6,13 +6,14 @@ import {
   CreateDateColumn,
   ManyToOne,
   ManyToMany,
-} from "typeorm";
-import User from "./Users";
-import Category from "./Category";
+  JoinColumn,
+} from 'typeorm';
+import User from './Users';
+import Category from './Category';
 
-@Entity("projects")
+@Entity('projects')
 export default class Project {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ length: 50, unique: true })
@@ -30,12 +31,14 @@ export default class Project {
   @Column()
   ends_at: Date;
 
-  @ManyToOne(() => User, (user) => user.own_projects)
-  id_user_owner: User;
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'id_user_owner', referencedColumnName: 'id' })
+  user_owner: User;
 
   @ManyToMany(() => User, (user) => user.projects_participated_in)
   contributors: User[];
 
-  @ManyToOne(() => Category, (category) => category.id)
-  id_category: Category;
+  @ManyToOne(() => Category)
+  @JoinColumn({ name: 'id_category', referencedColumnName: 'id' })
+  category: Category;
 }
