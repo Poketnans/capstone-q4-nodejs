@@ -13,7 +13,7 @@ import Category from './Category';
 import CourseMode from './CourseMode';
 import CoursePeriod from './CoursePeriod';
 import Review from './UserReview';
-import User from './User';
+import User from './Users';
 
 @Entity('courses')
 export default class Course {

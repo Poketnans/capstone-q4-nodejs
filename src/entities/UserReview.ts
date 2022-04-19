@@ -1,5 +1,5 @@
-import { Course } from "./Course";
-import { User } from "./User";
+import Course from './Courses';
+import User from './Users';
 
 import {
   Entity,
@@ -7,34 +7,33 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
-} from "typeorm";
+} from 'typeorm';
 
-@Entity("courses_review")
+@Entity('courses_review')
 export default class CourseReview {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ length: 280 })
   comment: string;
 
-  @Column({type : "integer"})
-  rating: number ;
+  @Column({ type: 'integer' })
+  rating: number;
 
   @Column({ unique: true })
   hash_user_course: string;
 
   @ManyToOne(() => Course)
   @JoinColumn({
-        name: "id_course",
-        referencedColumnName: "id",
-    })
-  course: Course
+    name: 'id_course',
+    referencedColumnName: 'id',
+  })
+  course: Course;
 
-
-  @ManyToOne(() => User, (oneUser) => oneUser.id_user)
+  @ManyToOne(() => User)
   @JoinColumn({
-        name: "id_user",
-        referencedColumnName: "id",
-    })
-  user: User
+    name: 'id_user',
+    referencedColumnName: 'id',
+  })
+  user: User;
 }
