@@ -1,14 +1,11 @@
 import { Request, Response } from "express"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
+import jwtConfig from "../../configs"
+import httpStatus from 'http-status'
 /* import userLogin from "../repositories/userLogin" */
 
 const loginController = async (req: Request, res: Response) => {
-
-    const config = {
-        secret: process.env.SECRET_KEY || "",
-        expiresIn: process.env.EXPIRES_IN || "24h"
-    }
 
     const { email, password } = req.body
     const user = await userLogin(email)
@@ -19,11 +16,11 @@ const loginController = async (req: Request, res: Response) => {
         return res.status(401).json({ message: "Wrong email/password" })
     }
 
-    const token = jwt.sign({ user }, config.secret, {
-        expiresIn: config.expiresIn
+    const token = jwt.sign({ user }, jwtConfig.secretKey, {
+        expiresIn: jwtConfig.expiresIn
     })
 
-    return res.status(200).json({ token })
+    return res.status(httpStatus.CREATED).json({ token })
 }
 
 export default loginController
