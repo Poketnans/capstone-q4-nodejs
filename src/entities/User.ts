@@ -39,9 +39,7 @@ export default class User {
   @Column()
   employed: boolean;
 
-  @ManyToMany(() => Project, {
-    eager: true,
-  })
+  @ManyToMany(() => Project)
   @JoinTable({
     name: "user_projects",
     joinColumn: {
@@ -55,24 +53,16 @@ export default class User {
   })
   projects_participated_in: Project[];
 
-  @OneToMany(() => Project, (project) => project.user_owner, {
-    eager: true,
-  })
+  @OneToMany(() => Project, (project) => project.user_owner)
   own_projects: Project[];
 
-  @OneToMany(() => Follower, (follower) => follower.target, {
-    eager: true,
-  })
+  @OneToMany(() => Follower, (follower) => follower.target)
   followers: Follower[];
 
-  @OneToMany(() => Follower, (follower) => follower.follower, {
-    eager: true,
-  })
+  @OneToMany(() => Follower, (follower) => follower.follower)
   following: Follower[];
 
-  @ManyToMany(() => Course, {
-    eager: true,
-  })
+  @ManyToMany(() => Course)
   @JoinTable({
     name: "users_courses",
     joinColumn: {
@@ -86,14 +76,10 @@ export default class User {
   })
   courses: [];
 
-  @OneToMany(() => Course, (course) => course.id_user_owner, {
-    eager: true,
-  })
+  @OneToMany(() => Course, (course) => course.user_owner)
   owned_courses: Course[];
 
-  @OneToOne(() => Image, {
-    eager: true,
-  })
+  @OneToOne(() => Image)
   @JoinColumn({ name: "id_image", referencedColumnName: "id" })
-  id_image: Image;
+  image: Image;
 }
