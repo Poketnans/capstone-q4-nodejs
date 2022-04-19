@@ -52,11 +52,11 @@ export default class Course {
   user_owner: User[];
 
   @ManyToOne(() => CourseMode)
-  @JoinColumn({ name: 'id_course_mode', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'id_mode', referencedColumnName: 'id' })
   mode: CourseMode;
 
   @ManyToOne(() => CoursePeriod)
-  @JoinColumn({ name: 'id_course_period', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'id_period', referencedColumnName: 'id' })
   period: CoursePeriod;
 
   @ManyToOne(() => Category)
