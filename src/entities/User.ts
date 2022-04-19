@@ -60,12 +60,12 @@ export default class User {
   })
   own_projects: Project[];
 
-  @OneToMany(() => Follower, (follower) => follower.idTarget, {
+  @OneToMany(() => Follower, (follower) => follower.target, {
     eager: true,
   })
   followers: Follower[];
 
-  @OneToMany(() => Follower, (follower) => follower.idFollower, {
+  @OneToMany(() => Follower, (follower) => follower.follower, {
     eager: true,
   })
   following: Follower[];
