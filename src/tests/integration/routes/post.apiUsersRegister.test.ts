@@ -35,11 +35,11 @@ describe('POST/api/users/register endpoint', () => {
   });
 
   beforeEach(async () => {
-    // await connection.clear();
+    await connection.clear();
     userRegisterPayload = mocked.newUser();
   });
 
-  it('should validate wrond schema', async () => {
+  it('should validate wrong schema', async () => {
     delete userRegisterPayload.email;
     delete userRegisterPayload.password;
 

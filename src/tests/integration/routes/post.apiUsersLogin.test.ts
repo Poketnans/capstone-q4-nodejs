@@ -35,18 +35,18 @@ describe('POST/api/users/register endpoint', () => {
   });
 
   beforeEach(async () => {
-    // await connection.clear();
+    await connection.clear();
     userRegisterPayload = mocked.newUser();
 
     await fetchData('post', apiEndpoints.post.register, userRegisterPayload);
   });
 
-  /** TODO - Ao ativar mais de um arquivo com seguências de conecção,
+  /** WARNING - Ao ativar mais de um arquivo com seguências de conecção,
    * começam a aparecer erros de TypeORM - isso pode ser a extensão do
-   * Jest dando conflito
+   * Jest dando. Desabilite a extensão e teste novamente.
    */
 
-  it('should validate wrond login schema', async () => {
+  it('should validate wrong login schema', async () => {
     const send = {
       body: {},
     };
