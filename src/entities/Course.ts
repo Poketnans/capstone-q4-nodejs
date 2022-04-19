@@ -8,16 +8,16 @@ import {
   UpdateDateColumn,
   OneToMany,
   JoinColumn,
-} from "typeorm";
-import Category from "./Category";
-import CourseMode from "./CourseMode";
-import CoursePeriod from "./CoursePeriod";
-import Review from "./UserReview";
-import User from "./Users";
+} from 'typeorm';
+import Category from './Category';
+import CourseMode from './CourseMode';
+import CoursePeriod from './CoursePeriod';
+import Review from './UserReview';
+import User from './User';
 
-@Entity("courses")
+@Entity('courses')
 export default class Course {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ length: 50, unique: true })
@@ -46,21 +46,23 @@ export default class Course {
 
   @ManyToOne(() => User)
   @JoinColumn({
-    name: "id_owner_course",
-    referencedColumnName: "id",
+    name: 'id_owner_course',
+    referencedColumnName: 'id',
   })
   user_owner: User[];
 
-  @OneToMany(() => CourseMode, (courseMode) => courseMode.id)
+  @ManyToOne(() => CourseMode)
+  @JoinColumn({ name: 'id_course_mode', referencedColumnName: 'id' })
   mode: CourseMode;
 
-  @OneToMany(() => CoursePeriod, (coursePeriod) => coursePeriod.id)
+  @ManyToOne(() => CoursePeriod)
+  @JoinColumn({ name: 'id_course_period', referencedColumnName: 'id' })
   period: CoursePeriod;
 
   @ManyToOne(() => Category)
-  @JoinColumn({ name: "id_category", referencedColumnName: "id" })
+  @JoinColumn({ name: 'id_category', referencedColumnName: 'id' })
   category: Category[];
 
-  @OneToMany(() => Review, (userReview) => userReview.id_course)
+  @OneToMany(() => Review, (userReview) => userReview.id)
   reviews: [];
 }
