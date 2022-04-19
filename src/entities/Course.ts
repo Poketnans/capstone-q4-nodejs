@@ -52,10 +52,10 @@ export default class Course {
   user_owner: User[];
 
   @OneToMany(() => CourseMode, (courseMode) => courseMode.id)
-  id_mode: string;
+  mode: CourseMode;
 
   @OneToMany(() => CoursePeriod, (coursePeriod) => coursePeriod.id)
-  id_period: string;
+  period: CoursePeriod;
 
   @ManyToOne(() => Category)
   @JoinColumn({ name: "id_category", referencedColumnName: "id" })
