@@ -1,4 +1,4 @@
 import UserRepository from './user.repository';
+import CourseRepository from './courses/course.repository';
 
-// eslint-disable-next-line import/prefer-default-export
-export { UserRepository };
+export { UserRepository, CourseRepository };
