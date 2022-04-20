@@ -10,7 +10,10 @@ class UserRepository implements IUserRepo {
     this.ormRepository = getRepository(User);
   }
 
-  saveUser = async (user: IUser) => this.ormRepository.save(user)
+  saveUser = (user: IUser) => this.ormRepository.save(user)
+
+  getUsers = () => this.ormRepository.find();
+
 }
 
 export default UserRepository;

@@ -12,7 +12,7 @@ import {
 import Category from './Category';
 import CourseMode from './CourseMode';
 import CoursePeriod from './CoursePeriod';
-import Review from './UserReview';
+import Review from './CourseReview';
 import User from './User';
 
 @Entity('courses')
