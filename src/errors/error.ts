@@ -8,10 +8,11 @@ class ErrorHandler {
     constructor(status: number, message: unknown){
       this.status =  status;
       this.message = message;
-    }
-}
+    };
+};
 
 const handleError = (err: unknown, res: Response) => {
+  
   if (err instanceof ErrorHandler) {
     const { status, message } = err;
   
