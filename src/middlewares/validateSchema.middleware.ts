@@ -2,10 +2,14 @@ import { Response, Request, NextFunction } from "express";
 import { ObjectSchema } from "yup";
 
 const validateSchemaMiddleware = (schema: ObjectSchema<any> ) => async (req: Request,res: Response, nextFx: NextFunction) => {
-  const schemaPayload = req.body;
 
   try {
-    await schema.validate(schemaPayload);
+    const validated =   await schema.validate(req.body,{
+      abortEarly:false,
+      stripUnknown: true
+    });
+    req.validated =  validated;
+    
     return nextFx();
   } catch (e: any | unknown) {
     
