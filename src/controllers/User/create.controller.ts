@@ -9,7 +9,7 @@ const createUserController = async ( req: Request, res: Response ) =>{
     const user = await createUserService(req.validated as IUser); 
     return res.status(201).json(user)
   } catch (e: unknown ) {
-    throw handleError(e,res);
+    return handleError(e,res);
   }
 } 
 export default createUserController;

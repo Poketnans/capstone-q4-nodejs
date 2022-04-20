@@ -1,5 +1,8 @@
+import httpStatus from "http-status";
+
 import { Response, Request, NextFunction } from "express";
 import { ObjectSchema } from "yup";
+import { ErrorHandler } from "../errors";
 
 const validateSchemaMiddleware = (schema: ObjectSchema<any> ) => async (req: Request,res: Response, nextFx: NextFunction) => {
 
@@ -12,11 +15,9 @@ const validateSchemaMiddleware = (schema: ObjectSchema<any> ) => async (req: Req
     
     return nextFx();
   } catch (e: any | unknown) {
-
-    return {
-      res : res.status(400),
-      req : res.json({ error: e.errors.join(", ")})
-    }
+    
+    return nextFx( new ErrorHandler(httpStatus.BAD_REQUEST, e.errors.join(", ")) ) 
+    
   }
 }
 
