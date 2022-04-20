@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from "express"
-import jwt from "jsonwebtoken"
+import { Request, Response, NextFunction } from 'express'
+import jwt from 'jsonwebtoken'
 import httpStatus from 'http-status'
-import jwtConfig from "../configs"
+import jwtConfig from '../configs'
 
 const authenticateUser = (req: Request, res: Response, next: NextFunction) => {
   if (!req.headers.authorization) {

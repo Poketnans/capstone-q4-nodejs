@@ -13,7 +13,7 @@ const loginController = async (req: Request, res: Response) => {
   const match = await bcrypt.compare(password, user.password)
 
   if (!match) {
-    return res.status(401).json({ message: "Wrong email/password" })
+    return res.status(httpStatus.UNATHORIZED).json({ message: "Wrong email/password" })
   }
 
   const token = jwt.sign({ user }, jwtConfig.secretKey, {

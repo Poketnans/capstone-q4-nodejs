@@ -1,5 +1,6 @@
-import { Request, Response, NextFunction } from "express"
-import { ObjectSchema } from "yup"
+import { Request, Response, NextFunction } from 'express'
+import httpStatus from 'http-status'
+import { ObjectSchema } from 'yup'
 
 const validateSchema = (shape: ObjectSchema<any>) => async (req:Request, res:Response, next:NextFunction) => {
   try {
@@ -10,7 +11,7 @@ const validateSchema = (shape: ObjectSchema<any>) => async (req:Request, res:Res
     req['validated'] = validated
     return next()
   } catch (e) {
-    return res.status(400).json({ error: e.errors })
+    return res.status(httpStatus.BAD_REQUEST).json({ error: e.errors })
   }
 }
 
