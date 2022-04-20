@@ -1,4 +1,4 @@
 import UserRepository from './user.repository';
-import CourseRepository from './courses/course.repository';
+import CourseRepository from './course/course.repository';
 
 export { UserRepository, CourseRepository };
