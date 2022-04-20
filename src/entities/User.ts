@@ -10,15 +10,15 @@ import {
   JoinColumn,
   ManyToMany,
   JoinTable,
-} from "typeorm";
-import Course from "./Courses";
-import Follower from "./Followers";
-import Image from "./Images";
-import Project from "./Projects";
+} from 'typeorm';
+import Course from './Course';
+import Follower from './Follower';
+import Image from './Image';
+import Project from './Project';
 
-@Entity("users")
+@Entity('users')
 export default class User {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ length: 50 })
@@ -41,14 +41,14 @@ export default class User {
 
   @ManyToMany(() => Project)
   @JoinTable({
-    name: "user_projects",
+    name: 'user_projects',
     joinColumn: {
-      name: "id_user",
-      referencedColumnName: "id",
+      name: 'id_user',
+      referencedColumnName: 'id',
     },
     inverseJoinColumn: {
-      name: "id_project",
-      referencedColumnName: "id",
+      name: 'id_project',
+      referencedColumnName: 'id',
     },
   })
   projects_participated_in: Project[];
@@ -64,14 +64,14 @@ export default class User {
 
   @ManyToMany(() => Course)
   @JoinTable({
-    name: "users_courses",
+    name: 'users_courses',
     joinColumn: {
-      name: "id_user",
-      referencedColumnName: "id",
+      name: 'id_user',
+      referencedColumnName: 'id',
     },
     inverseJoinColumn: {
-      name: "id_course",
-      referencedColumnName: "id",
+      name: 'id_course',
+      referencedColumnName: 'id',
     },
   })
   courses: [];
@@ -80,6 +80,6 @@ export default class User {
   owned_courses: Course[];
 
   @OneToOne(() => Image)
-  @JoinColumn({ name: "id_image", referencedColumnName: "id" })
+  @JoinColumn({ name: 'id_image', referencedColumnName: 'id' })
   image: Image;
 }
