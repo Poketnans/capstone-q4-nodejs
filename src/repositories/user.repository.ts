@@ -8,6 +8,11 @@ class UserRepository implements IUserRepo {
   constructor() {
     this.ormRepository = getRepository(User);
   }
+
+  getUsers = async () => {
+    return await this.ormRepository.find();
+  };
+
 }
 
 export default UserRepository;

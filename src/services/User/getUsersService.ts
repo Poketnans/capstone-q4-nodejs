@@ -1,16 +1,13 @@
-import { InterfaceUser } from "../repositories/user/interface";
-import secureUserDataService from "./secureUserDataService";
-import UserRepoData from "../repositories/user";
+import { IUser } from "../../repositories/user/interfaces";
+import UserRepository from "../../repositories/user.repository";
 
 const getUsersService = async () => {
   try {
-    const users: InterfaceUser[] = await new UserRepoData().getUsers();
-    const secureUsers: InterfaceUser[] = users.map((user) =>
-      secureUserDataService(user)
-    );
+    const users: IUser[] = await new UserRepository().getUsers();
+   
     return {
       status: 200,
-      body: secureUsers,
+      body: users,
     };
   } catch (err: any) {
     return {
