@@ -9,7 +9,7 @@ const userSchema = yup.object().shape({
   email: yup.string().email("format invalid for email.").required(`${requiredText} email.`),
   password: yup.string().required(`${requiredText} password.`).min(6,"minimum characters 6").transform((value)=> bcrypt.hashSync(value,10) ),
   employed: yup.boolean().default(false),
-  created_at : yup.date().nullable().default(()=> new Date()),
-  updated_at : yup.date().nullable().default(()=> new Date()),
+  createdAt : yup.date().nullable().default(()=> new Date()),
+  updatedAt : yup.date().nullable().default(()=> new Date()),
 })
 export default userSchema;

@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
 import { faker } from "@faker-js/faker";
-import bcrypt from "bcrypt";
 import { IUser } from "../../../types/user";
 
 interface IGenerateUser {
@@ -15,8 +14,8 @@ const generateUser: IGenerateUser = {
     password: faker.internet.password(6),
     email: faker.internet.email().toLocaleLowerCase(),
     employed: false,
-    created_at: new Date(),
-    updated_at: new Date(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
   }),
   newUserWrongEmail: ()=>({
     id: uuidv4(),
@@ -24,8 +23,8 @@ const generateUser: IGenerateUser = {
     email: faker.internet.email().toLocaleLowerCase().replace("@",""),
     password: faker.internet.password(6),
     employed: false,
-    created_at: new Date(),
-    updated_at: new Date(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
   }),
 }
 
