@@ -11,10 +11,10 @@ import {
   ManyToMany,
   JoinTable,
 } from "typeorm";
-import Course from "./Courses";
-import Follower from "./Followers";
-import Image from "./Images";
-import Project from "./Projects";
+import Course from "./Course";
+import Follower from "./Follower";
+import Image from "./Image";
+import Project from "./Project";
 
 @Entity("users")
 export default class User {
