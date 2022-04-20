@@ -1,8 +1,9 @@
 import { Router } from "express"
+import getUsersController from "../controllers/User/getAll"
 
 const userRoutes = Router()
 
-userRoutes.get("")
+userRoutes.get("", getUsersController)
 userRoutes.get("/profile")
 userRoutes.post("/login")
 userRoutes.post("/signup")
