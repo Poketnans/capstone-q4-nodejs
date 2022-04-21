@@ -1,6 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 import User from '../entities/User';
 import { IUserRepo } from './interfaces';
+import { IUser } from "../types/user";
 
 class UserRepository implements IUserRepo {
   private ormRepository: Repository<User>;
@@ -9,9 +10,9 @@ class UserRepository implements IUserRepo {
     this.ormRepository = getRepository(User);
   }
 
-  getUsers = async () => {
-    return await this.ormRepository.find();
-  };
+  saveUser = (user: IUser) => this.ormRepository.save(user)
+
+  getUsers = () => this.ormRepository.find();
 
 }
 

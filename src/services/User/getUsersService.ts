@@ -4,10 +4,13 @@ import UserRepository from "../../repositories/user.repository";
 const getUsersService = async () => {
   try {
     const users: IUser[] = await new UserRepository().getUsers();
-   
+    const secureUsers = users.map((user: IUser )=> {
+      const { password , ...newSecureUser } = user;
+      return newSecureUser
+    } )
     return {
       status: 200,
-      body: users,
+      body: secureUsers,
     };
   } catch (err: any) {
     return {
