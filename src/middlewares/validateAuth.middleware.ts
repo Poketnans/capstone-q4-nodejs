@@ -18,7 +18,7 @@ const validateAuth = (req: Request, res: Response, nextFx: NextFunction) => {
     });
   }
 
-  jwt.verify(token, jwtConfig.secretKey, (err, decoded) => {
+  jwt.verify(token, jwtConfig.secretKey, (err, decoded: any) => {
     if (err) {
       return res.status(401).json({
         error: 'invalid token',
