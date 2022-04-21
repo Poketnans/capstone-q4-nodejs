@@ -5,6 +5,7 @@ declare global {
     interface Request {
       validated: any ;
       token: string;
+      user: any;
     }
   }
 }
