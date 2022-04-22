@@ -8,7 +8,7 @@ import {
   ManyToMany,
   JoinColumn,
 } from 'typeorm';
-import User from './Users';
+import User from './User';
 import Category from './Category';
 
 @Entity('projects')
