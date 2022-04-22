@@ -21,13 +21,13 @@ const updateUserSchema = yup.object().shape({
     ),
   email: yup
     .string()
-    .email()
+    .email('invalid email format')
     .lowercase()
     .test('emailUnique', async function _(value: string) {
       if (value) {
         const { path, createError }: This = this;
         const userRepository = getRepository(User);
-        const user = await userRepository.findOne({ email: value });
+        const user = await userRepository.findOne({ email: value }); // enquanto não tiver função pra pegar um usuário no UserRepository fica assim
         if (user) {
           return createError({
             path,
@@ -39,6 +39,7 @@ const updateUserSchema = yup.object().shape({
     }),
   password: yup
     .string()
+    .transform((value) => bcrypt.hashSync(value, 10))
     .test(
       'minLenghtOf6',
       'password must have min 6 chars',
@@ -54,8 +55,7 @@ const updateUserSchema = yup.object().shape({
         }
         return true;
       }
-    )
-    .transform((value) => bcrypt.hashSync(value, 10)),
+    ),
   employed: yup.boolean(),
 });
 

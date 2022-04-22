@@ -2,10 +2,9 @@ import { Request, Response } from 'express';
 import updateUserService from '../../services/users/update.user.service';
 
 const updateUser = async (req: Request, res: Response) => {
-  const { body, user } = req; // userId ou qualquer coisa que identifique o usuário, aguardando middleware que o faça ou eu mesmo faço
+  const { user, validated } = req; // user vindo do middleware de autenticação
+  updateUserService(validated, user);
 
-  updateUserService(body, user);
-
-  return res.json();
+  return res.status(204).json();
 };
 export default updateUser;
