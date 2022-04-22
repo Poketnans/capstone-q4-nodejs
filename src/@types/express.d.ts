@@ -1,10 +1,12 @@
-import * as express from "express";
+import * as express from 'express';
+import { IUser } from '../types/user';
 
 declare global {
   namespace Express {
     interface Request {
-      validated: any ;
+      validated: any;
       token: string;
+      user: IUser;
     }
   }
 }

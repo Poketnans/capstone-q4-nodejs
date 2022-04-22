@@ -1,23 +1,10 @@
-// import { getRepository } from 'typeorm';
-import fs from 'fs';
 import { Request, Response } from 'express';
-import tempDirCleaner from '../../services/tempDir/tempDirCleaner';
+import updateUserService from '../../services/users/update.user.service';
 
-const updateUser = (req: Request, res: Response) => {
-  const { file, body } = req;
+const updateUser = async (req: Request, res: Response) => {
+  const { body, user } = req; // userId ou qualquer coisa que identifique o usuário, aguardando middleware que o faça ou eu mesmo faço
 
-  const data = JSON.parse(body.data);
-  const buffer = Buffer.from(
-    fs.readFileSync(`${__dirname.split('src')[0]}${file.path}`, 'base64'),
-    'base64'
-  );
-
-  const imageInfo = {
-    mimetype: file.mimetype,
-    name: file.originalname,
-    binary: JSON.stringify(buffer),
-  };
-  tempDirCleaner();
+  updateUserService(body, user);
 
   return res.json();
 };
