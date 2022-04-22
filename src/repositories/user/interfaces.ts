@@ -17,13 +17,16 @@ interface IUserQuery {
   password?: string;
   employed?: boolean;
 }
+
 interface IUserRepo {
   registerUser: (user: IUser) => Promise<IUser>;
   getUsers: () => Promise<IUser[]>;
+  getUserLogin: (email: string) => Promisse<IUser>;
   deleteUser: (uuid: string) => Promise<DeleteResult>;
   getOneUser: (object: IUserQuery) => Promise<IUser>;
   updateUser: (object: IUserQuery, id: string) => Promise<UpdateResult>;
 }
+
 export { IUser, IUserRepo, IUserQuery };
 
 

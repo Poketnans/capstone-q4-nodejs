@@ -12,7 +12,9 @@ class UserRepository implements IUserRepo {
 
   saveUser = (user: IUser) => this.ormRepository.save(user)
 
-  getUsers = () => this.ormRepository.find();
+  getUsers:IUser[] = () => this.ormRepository.find();
+
+  getUserLogin:IUser = (email: string) => this.ormRepository.findOne({email})
 
 }
 
