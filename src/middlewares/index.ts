@@ -1,7 +1,5 @@
-import validateSchemaMiddleware from "./validateSchema.middleware";
+import upload from './multer';
+import updateUserImageValidator from './update.user.image.validator';
+import validateSchemaMiddleware from './validateSchema.middleware';
 
-export {
-  // por ter somente uma importação o slint reclama para exportar default ao inves de desfragmentado
-  // eslint-disable-next-line import/prefer-default-export
-  validateSchemaMiddleware
-}
+export { validateSchemaMiddleware, upload, updateUserImageValidator };

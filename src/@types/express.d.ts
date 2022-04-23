@@ -5,6 +5,8 @@ declare global {
     interface Request {
       validated: any ;
       token: string;
+      imageInfo: any;
+      user: any;
     }
   }
 }
