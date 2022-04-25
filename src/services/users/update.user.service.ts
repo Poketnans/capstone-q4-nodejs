@@ -1,9 +1,8 @@
 import { UserRepository } from '../../repositories';
 import { IUserQuery } from '../../repositories/user/interfaces';
-import { IUser } from '../../types/user';
 
-const updateUserService = (userInfo: IUserQuery, user: IUser) => {
-  new UserRepository().updateUser(userInfo, user);
+const updateUserService = (userInfo: IUserQuery, id: string) => {
+  new UserRepository().updateUser(userInfo, id);
 };
 
 export default updateUserService;

@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 import User from '../../entities/User';
-import { IUserRepo } from './interfaces';
+import { IUserQuery, IUserRepo } from './interfaces';
 import { IUser } from '../../types/user';
 
 class UserRepository implements IUserRepo {
@@ -14,7 +14,15 @@ class UserRepository implements IUserRepo {
 
   getUsers = () => this.ormRepository.find();
 
-  getOneUser = (userId: string) => this.ormRepository.findOne({ id: userId });
+  getOneUser = (userInfo: string) => {
+    if (userInfo.includes('@')) {
+      return this.ormRepository.findOne({ email: userInfo });
+    }
+    return this.ormRepository.findOne({ id: userInfo });
+  };
+
+  updateUser = (userUpdated: IUserQuery, id: string) =>
+    this.ormRepository.update(id, userUpdated);
 }
 
 export default UserRepository;

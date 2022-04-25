@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt';
 import * as yup from 'yup';
-import { getRepository } from 'typeorm';
-import User from '../entities/User';
+import { UserRepository } from '../repositories';
 
 interface This {
   path?: string;
@@ -26,8 +25,7 @@ const updateUserSchema = yup.object().shape({
     .test('emailUnique', async function _(value: string) {
       if (value) {
         const { path, createError }: This = this;
-        const userRepository = getRepository(User);
-        const user = await userRepository.findOne({ email: value }); // enquanto não tiver função pra pegar um usuário no UserRepository fica assim
+        const user = await new UserRepository().getOneUser(value);
         if (user) {
           return createError({
             path,
