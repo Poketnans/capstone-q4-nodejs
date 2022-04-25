@@ -14,7 +14,11 @@ class UserRepository implements IUserRepo {
 
   getUsers = () => this.ormRepository.find();
 
+  getUserLogin = (email: string) => this.ormRepository.findOne({email})
+
   getOneUser = (userId: string) => this.ormRepository.findOne({ id: userId });
+
+  deleteUser = (userId: string) => this.ormRepository.delete(userId);
 }
 
 export default UserRepository;
