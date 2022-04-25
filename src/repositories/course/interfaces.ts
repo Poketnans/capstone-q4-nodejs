@@ -18,7 +18,13 @@ interface ICourseQuery {
   certificate?: boolean;
 }
 
+interface ICourseFindOne {
+  id: string;
+}
+
 interface ICourseRepo {
   saveCourse: (course: Course) => Promise<Course>;
+  getCourses: () => Promise<Course[]>;
+  findOneOrFail: (id: ICourseFindOne) => Promise<Course>;
 }
-export { ICourseRepo, ICourseQuery };
+export { ICourseRepo, ICourseFindOne, ICourseQuery };

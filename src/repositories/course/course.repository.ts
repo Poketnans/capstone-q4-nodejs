@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 import Course from '../../entities/Course';
-import { ICourseRepo } from './interfaces';
+import { ICourseFindOne, ICourseRepo } from './interfaces';
 
 class CourseRepository implements ICourseRepo {
   private ormRepository: Repository<Course>;
@@ -10,6 +10,11 @@ class CourseRepository implements ICourseRepo {
   }
 
   saveCourse = (course: Course) => this.ormRepository.save(course);
+
+  getCourses = () => this.ormRepository.find();
+
+  findOneOrFail = (objectId: ICourseFindOne) =>
+    this.ormRepository.findOneOrFail({ ...objectId });
 }
 
 export default CourseRepository;
