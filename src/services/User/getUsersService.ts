@@ -1,5 +1,5 @@
 import { IUser } from "../../repositories/user/interfaces";
-import UserRepository from "../../repositories/user.repository";
+import UserRepository from "../../repositories/user/user.repository";
 
 const getUsersService = async () => {
   try {
