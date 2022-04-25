@@ -1,9 +1,9 @@
 import { Router } from "express"
 import getUsersController from "../controllers/User/getAll";
 
-import { validateSchemaMiddleware } from "../middlewares";
+import { validateAuth, validateSchemaMiddleware } from "../middlewares";
 import { userSchema } from "../schemas";
-import { createUserController
+import { createUserController, deleteUserController
 } from "../controllers/User";
 import loginController from "../controllers/User/login";
 
@@ -19,7 +19,7 @@ userRoutes.post("/login", loginController)
 userRoutes.post("/signup")
 userRoutes.post("/logout")
 userRoutes.patch("")
-userRoutes.delete("")
+userRoutes.delete("/:uuid", validateAuth, deleteUserController)
 
 
 export default userRoutes
