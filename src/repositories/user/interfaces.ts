@@ -1,4 +1,4 @@
-// import { DeleteResult, UpdateResult } from 'typeorm';
+import { DeleteResult, UpdateResult } from 'typeorm';
 
 interface IUser {
   id: string;
@@ -21,7 +21,7 @@ interface IUserRepo {
   saveUser: (user: IUser) => Promise<IUser>;
   // registerUser: (user: IUser) => Promise<IUser>;
   getUsers: () => Promise<IUser[]>;
-  // deleteUser: (uuid: string) => Promise<DeleteResult>;
+  deleteUser: (userId: string) => Promise<DeleteResult>;
   getOneUser: (userId: string) => Promise<IUser>;
   // updateUser: (object: IUserQuery, id: string) => Promise<UpdateResult>;
 }
