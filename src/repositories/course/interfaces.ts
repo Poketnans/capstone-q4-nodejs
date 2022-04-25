@@ -1,48 +1,24 @@
-import { DeleteResult, UpdateResult } from "typeorm";
-import { ICourseMode } from "../../repositories"
-import { ICoursePeriod } from "../../repositories"
-import { ICategory } from "../category/interfaces";
-import { IReviews } from "../../repositories"
-import { IUser } from "../user/interfaces";
-
-
-interface ICourse {
-  id: string;
-  title: string;
-  user_owner: IUser;
-  address: string;
-  starts_at: Date; 
-  ends_at: Date;
-  start_time: Date;
-  end_time: Date;
-  created_at: Date;
-  updated_at: Date;
-  mode: ICourseMode;
-  period: ICoursePeriod;
-  category: ICategory;
-  certificate: boolean;
-}
+import { IUser } from '../user/interfaces';
+import Course from '../../entities/Course';
+import CourseMode from '../../entities/CourseMode';
+import CoursePeriod from '../../entities/CoursePeriod';
+import Category from '../../entities/Category';
 
 interface ICourseQuery {
-  id: string;
-  title: string;
+  title?: string;
   user_owner: IUser;
-  address: string;
-  starts_at: Date; 
-  ends_at: Date;
-  start_time: Date;
-  end_time: Date;
-  created_at: Date;
-  updated_at: Date;
-  mode: ICourseMode;
-  period: ICoursePeriod;
-  category: ICategory;
-  reviews: Array<IReviews>;
-  certificate: boolean;
+  address?: string;
+  starts_at?: Date;
+  ends_at?: Date;
+  start_time?: Date;
+  end_time?: Date;
+  mode?: CourseMode;
+  period?: CoursePeriod;
+  category?: Category;
+  certificate?: boolean;
 }
 
 interface ICourseRepo {
-  saveCourse: (course: ICourse) => Promise<ICourse>;
- 
+  saveCourse: (course: Course) => Promise<Course>;
 }
-export { ICourse, ICourseRepo, ICourseQuery };
+export { ICourseRepo, ICourseQuery };

@@ -1,14 +1,20 @@
-import { Router } from "express"
+import { Router } from 'express';
+import createCourseController from '../controllers/Course/courseCreate.controller';
+import { validateSchemaMiddleware } from '../middlewares';
+import courseSchema from '../schemas/courseCreate.schema';
 
+const coursesRoutes = Router();
 
-const coursesRoutes = Router()
+coursesRoutes.get('');
+coursesRoutes.get('/:uuid');
 
-coursesRoutes.get("")
-coursesRoutes.get("/:uuid")
+coursesRoutes.post(
+  '',
+  validateSchemaMiddleware(courseSchema),
+  createCourseController
+);
 
-coursesRoutes.post("")
+coursesRoutes.patch('');
+coursesRoutes.delete('');
 
-coursesRoutes.patch("")
-coursesRoutes.delete("")
-
-export default coursesRoutes
+export default coursesRoutes;

@@ -1,9 +1,14 @@
-import { Request ,Response } from "express";
-import  createCourseService  from "../../services/Course/createCourseService";
+import { Request, Response } from 'express';
+import httpStatus from 'http-status';
+import { handleError } from '../../errors';
+import createCourseService from '../../services/Course/createCourseService';
 
-const createUserController = async (req: Request, res: Response) =>{
-    const { status, body } = await createCourseService(req);
-     
-    res.status(status).json(body);    
+const createCourseController = async (req: Request, res: Response) => {
+  try {
+    const course = await createCourseService(req.validated);
+    return res.status(httpStatus.CREATED).json(course);
+  } catch (error) {
+    return handleError(error, res);
+  }
 };
-export default createUserController;
+export default createCourseController;

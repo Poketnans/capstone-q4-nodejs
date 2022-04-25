@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 import Course from '../../entities/Course';
-import { ICourse, ICourseRepo } from './interfaces';
+import { ICourseRepo } from './interfaces';
 
 class CourseRepository implements ICourseRepo {
   private ormRepository: Repository<Course>;
@@ -9,10 +9,7 @@ class CourseRepository implements ICourseRepo {
     this.ormRepository = getRepository(Course);
   }
 
-  saveCourse = async(course: ICourse) => {
-        return await this.ormRepository.save(course)
-    }
-
+  saveCourse = (course: Course) => this.ormRepository.save(course);
 }
 
 export default CourseRepository;
