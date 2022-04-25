@@ -1,15 +1,15 @@
 import { Router } from "express"
 import getUsersController from "../controllers/User/getAll";
 
-import { validateSchemaMiddleware } from "../middlewares";
+import { validateAuth, validateSchemaMiddleware } from "../middlewares";
 import { userSchema } from "../schemas";
-import { createUserController
+import { createUserController, getOneController
 } from "../controllers/User";
 
 const userRoutes = Router()
 
 userRoutes.get("", getUsersController)
-userRoutes.get("/profile")
+userRoutes.get("/:user_id", validateAuth, getOneController)
 userRoutes.post("/register",
   validateSchemaMiddleware(userSchema),
   createUserController
