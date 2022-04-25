@@ -1,4 +1,4 @@
-import UserRepository from './user.repository';
+import UserRepository from './user/user.repository';
 import CategoryRepository from './category/category.repository';
 import CourseRepository from './course/course.repository';
 import FollowerRepository from './follower/follower.repository';
