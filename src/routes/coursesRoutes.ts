@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { CourseGetOneControler } from "../controllers/courses";
+import { CourseGetOneControler, DeleteCourseControler } from "../controllers/courses";
 
 const coursesRoutes = Router()
 
@@ -12,6 +12,9 @@ coursesRoutes.get("/:uuid",
 coursesRoutes.post("")
 
 coursesRoutes.patch("")
-coursesRoutes.delete("")
+coursesRoutes.delete("/:uuid", 
+// será adicionado o middleware de auth
+  DeleteCourseControler
+)
 
 export default coursesRoutes

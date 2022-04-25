@@ -16,6 +16,8 @@ interface ICourseFindOne{
 
 interface ICourseRepo {
   findOneOrFail : (id: ICourseFindOne) => Promise<ICourse> ;
+  deleteOneCourse : (ObjectId: ICourseFindOne) => Promise<any>;
+
 }
 
 export { ICourse,ICourseFindOne ,ICourseRepo };
