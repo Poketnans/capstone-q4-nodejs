@@ -9,6 +9,7 @@ class CourseRepository implements ICourseRepo {
     this.ormRepository = getRepository(Course);
   }
 
+  getCourses = () => this.ormRepository.find();
   findOneOrFail = (objectId: ICourseFindOne) => this.ormRepository.findOneOrFail({...objectId});
 }
 
