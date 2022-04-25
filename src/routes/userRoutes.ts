@@ -18,7 +18,7 @@ userRoutes.post("/login")
 userRoutes.post("/signup")
 userRoutes.post("/logout")
 userRoutes.patch("")
-userRoutes.delete("", validateAuth, deleteUserController)
+userRoutes.delete("/:uuid", validateAuth, deleteUserController)
 
 
 export default userRoutes
