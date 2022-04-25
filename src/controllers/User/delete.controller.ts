@@ -4,9 +4,9 @@ import { UserRepository } from '../../repositories';
 
 const deleteUserController = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const { id } = req.params;
+    const { uuid } = req.params;
 
-    const user = await new UserRepository().getOneUser(id);
+    const user = await new UserRepository().getOneUser(uuid);
 
     if (!user) {
       return res.status(404).json({
@@ -14,7 +14,7 @@ const deleteUserController = async (req: Request, res: Response): Promise<Respon
       });
     }
 
-    await new UserRepository().deleteUser(id);
+    await new UserRepository().deleteUser(uuid);
     return res.status(200).send();
   } catch (error) {
     return handleError(error, res);
