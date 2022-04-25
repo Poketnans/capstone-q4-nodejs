@@ -1,8 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
-import User from '../entities/User';
+import User from '../../entities/User';
 import { IUserRepo } from './interfaces';
-import { IUser } from '../types/user';
-import { IUserQuery } from './user/interfaces';
+import { IUser } from '../../types/user';
 
 class UserRepository implements IUserRepo {
   private ormRepository: Repository<User>;
@@ -15,9 +14,7 @@ class UserRepository implements IUserRepo {
 
   getUsers = () => this.ormRepository.find();
 
-  updateUser = (updatedUser: IUserQuery, user: IUser) => {
-    this.ormRepository.update({ id: user.id }, updatedUser);
-  };
+  getOneUser = (userId: string) => this.ormRepository.findOne({ id: userId });
 }
 
 export default UserRepository;

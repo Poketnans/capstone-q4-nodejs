@@ -1,4 +1,4 @@
-import { DeleteResult, UpdateResult } from 'typeorm';
+// import { DeleteResult, UpdateResult } from 'typeorm';
 
 interface IUser {
   id: string;
@@ -18,10 +18,11 @@ interface IUserQuery {
   employed?: boolean;
 }
 interface IUserRepo {
-  registerUser: (user: IUser) => Promise<IUser>;
+  saveUser: (user: IUser) => Promise<IUser>;
+  // registerUser: (user: IUser) => Promise<IUser>;
   getUsers: () => Promise<IUser[]>;
-  deleteUser: (uuid: string) => Promise<DeleteResult>;
-  getOneUser: (object: IUserQuery) => Promise<IUser>;
-  updateUser: (updatedUser: IUserQuery, id: string) => Promise<UpdateResult>;
+  // deleteUser: (uuid: string) => Promise<DeleteResult>;
+  getOneUser: (userId: string) => Promise<IUser>;
+  // updateUser: (object: IUserQuery, id: string) => Promise<UpdateResult>;
 }
 export { IUser, IUserRepo, IUserQuery };
