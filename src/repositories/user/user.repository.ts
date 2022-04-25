@@ -14,6 +14,8 @@ class UserRepository implements IUserRepo {
 
   getUsers = () => this.ormRepository.find();
 
+  getUserLogin = (email: string) => this.ormRepository.findOne({email})
+
   getOneUser = (userId: string) => this.ormRepository.findOne({ id: userId });
 }
 

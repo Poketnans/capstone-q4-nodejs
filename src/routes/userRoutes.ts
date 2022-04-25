@@ -5,6 +5,7 @@ import { validateSchemaMiddleware } from "../middlewares";
 import { userSchema } from "../schemas";
 import { createUserController
 } from "../controllers/User";
+import loginController from "../controllers/User/login";
 
 const userRoutes = Router()
 
@@ -14,7 +15,7 @@ userRoutes.post("/register",
   validateSchemaMiddleware(userSchema),
   createUserController
 );
-userRoutes.post("/login")
+userRoutes.post("/login", loginController)
 userRoutes.post("/signup")
 userRoutes.post("/logout")
 userRoutes.patch("")

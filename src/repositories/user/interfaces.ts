@@ -21,6 +21,7 @@ interface IUserRepo {
   saveUser: (user: IUser) => Promise<IUser>;
   // registerUser: (user: IUser) => Promise<IUser>;
   getUsers: () => Promise<IUser[]>;
+  getUserLogin: (email: string) => Promise<IUser>;
   // deleteUser: (uuid: string) => Promise<DeleteResult>;
   getOneUser: (userId: string) => Promise<IUser>;
   // updateUser: (object: IUserQuery, id: string) => Promise<UpdateResult>;
