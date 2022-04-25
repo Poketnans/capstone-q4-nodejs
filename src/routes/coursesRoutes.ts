@@ -1,10 +1,13 @@
 import { Router } from "express"
-
+import { CourseGetOneControler } from "../controllers/courses";
 
 const coursesRoutes = Router()
 
 coursesRoutes.get("")
-coursesRoutes.get("/:uuid")
+// será adicionado o middleware de auth
+coursesRoutes.get("/:uuid",
+  CourseGetOneControler
+)
 
 coursesRoutes.post("")
 
