@@ -1,9 +1,9 @@
-import { ICourse } from "../../repositories/course/interfaces";
 import { CourseRepository } from "../../repositories";
+import Course from "../../entities/Course";
 
 const getCoursesService = async () => {
   try {
-    const courses: ICourse[] = await new CourseRepository().getCourses();
+    const courses: Course[] = await new CourseRepository().getCourses();
   
     return {
       status: 200,
