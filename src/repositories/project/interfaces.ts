@@ -1,1 +1,14 @@
-export interface IProjectRepo {}
+export interface Iproject{
+    
+    id: string,
+    name: string,
+    description: string,
+    created_at : Date,
+    starts_at : Date,
+    ends_at : Date,
+    
+}
+
+export interface IProjectRepo {
+    getAll : ()=> Promise<Iproject[]>
+}

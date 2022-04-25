@@ -1,8 +1,9 @@
-import { Router } from "express"
+import { Router } from "express";
+import { projectsGetAllController } from "../controllers/projects";
 
 const projectsRoutes = Router()
 
-projectsRoutes.get("")
+projectsRoutes.get("", projectsGetAllController)
 projectsRoutes.get("/:uuid")
 projectsRoutes.post("")
 projectsRoutes.patch("")
