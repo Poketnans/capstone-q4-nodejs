@@ -1,27 +1,16 @@
-import { Router } from "express"
-<<<<<<< HEAD
-import getCoursesController from "../controllers/Course/usersCourseGetAll.controller"
+import { Router } from 'express';
+import getCoursesController from '../controllers/Course/usersCourseGetAll.controller';
+import { CourseGetOneControler } from '../controllers/courses';
 
+const coursesRoutes = Router();
 
-const coursesRoutes = Router()
-
-coursesRoutes.get("",getCoursesController)
-coursesRoutes.get("/:uuid")
-=======
-import { CourseGetOneControler } from "../controllers/courses";
-
-const coursesRoutes = Router()
-
-coursesRoutes.get("")
+coursesRoutes.get('', getCoursesController);
 // será adicionado o middleware de auth
-coursesRoutes.get("/:uuid",
-  CourseGetOneControler
-)
->>>>>>> development
+coursesRoutes.get('/:uuid', CourseGetOneControler);
 
-coursesRoutes.post("")
+coursesRoutes.post('');
 
-coursesRoutes.patch("")
-coursesRoutes.delete("")
+coursesRoutes.patch('');
+coursesRoutes.delete('');
 
-export default coursesRoutes
+export default coursesRoutes;
