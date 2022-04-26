@@ -23,7 +23,7 @@ createConnection(ormconfig)
     const PORT = process.env.PORT ?? 3000;
     console.log('Database connected');
     app.listen(PORT, () =>
-      console.log(`App is running on http//localhost:${PORT}`)
+      console.log(`App is running on http://localhost:${PORT}`)
     );
   })
   .catch((e) => console.log(e));
