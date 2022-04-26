@@ -1,23 +1,15 @@
-interface ICourse {
-  id: string;
-  title: string;
-  address: string;
-  starts_at: Date; 
-  ends_at: Date;
-  start_time: Date;
-  end_time: Date;
-  created_at: Date;
-  updated_at: Date;
-}
+import Course from '../../entities/Course';
 
-interface ICourseFindOne{
+interface ICourseFindOne {
   id: string;
 }
 
 interface ICourseRepo {
-  findOneOrFail : (id: ICourseFindOne) => Promise<ICourse> ;
   deleteOneCourse : (ObjectId: ICourseFindOne) => Promise<any>;
+  
+  getCourses: () => Promise<Course[]>;
 
+  findOneOrFail: (id: ICourseFindOne) => Promise<Course>;
 }
 
-export { ICourse,ICourseFindOne ,ICourseRepo };
+export { ICourseRepo, ICourseFindOne };
