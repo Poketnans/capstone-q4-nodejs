@@ -1,6 +1,7 @@
 import CourseGetOneControler from "./getOne.controllers";
+import updateCourseController from "./update.controllers";
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
+  updateCourseController,
   CourseGetOneControler
 }
