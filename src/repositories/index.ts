@@ -5,7 +5,7 @@ import FollowerRepository from './follower/follower.repository';
 import ImageProfileRepository from './imageProfile/imageProfile.repository';
 import ProjectRepository from './project/project.repository';
 import CourseReviewRepository from './courseReview/courseReview.repository';
-import CourseModeRepository from './courseMode/course.repository';
+import CourseModeRepository from './courseMode/courseMode.repository';
 
 export {
   UserRepository,
