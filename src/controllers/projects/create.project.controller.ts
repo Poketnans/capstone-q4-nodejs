@@ -10,7 +10,7 @@ const createProjecController = async (req: Request, res: Response) => {
     const project = await createProjectService(user.id, validated);
     return res.status(httpStatus.CREATED).json(project);
   } catch (e: unknown) {
-    throw handleError(e, res);
+    return handleError(e, res);
   }
 };
 
