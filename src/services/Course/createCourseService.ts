@@ -1,18 +1,17 @@
-import { Request } from 'express';
 import Course from '../../entities/Course';
 import { ErrorHandler } from '../../errors';
 import CourseRepository from '../../repositories/course/course.repository';
 
-const createCourseService = async (req: Request) => {
+const createCourseService = async (reqValidated: Course) => {
   try {
-    const courseValidated = req.body.validated;
+    const courseValidated = reqValidated;
     const couserCreated: Course = await new CourseRepository().saveCourse(
       courseValidated
     );
 
     return couserCreated;
-  } catch (e) {
-    throw new ErrorHandler(400, e);
+  } catch (err: any) {
+    throw new ErrorHandler(400, err.message);
   }
 };
 export default createCourseService;
