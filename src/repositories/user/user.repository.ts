@@ -13,7 +13,6 @@ class UserRepository implements IUserRepo {
   saveUser = (user: IUser) => this.ormRepository.save(user);
 
   getUsers = () => this.ormRepository.find();
-
   getOneUser = (userInfo: string) => {
     if (userInfo.includes('@')) {
       return this.ormRepository.findOne({ email: userInfo });
@@ -23,6 +22,9 @@ class UserRepository implements IUserRepo {
 
   updateUser = (userUpdated: IUserQuery, id: string) =>
     this.ormRepository.update(id, userUpdated);
+  getUserLogin = (email: string) => this.ormRepository.findOne({email});
+
+  deleteUser = (userId: string) => this.ormRepository.delete(userId);
 }
 
 export default UserRepository;
