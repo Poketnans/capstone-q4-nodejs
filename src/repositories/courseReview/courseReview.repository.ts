@@ -8,6 +8,11 @@ class CourseReviewRepository implements ICourseReviewRepo {
   constructor() {
     this.ormRepository = getRepository(CourseReview);
   }
+
+  findOneOrFail = (id: string) => this.ormRepository.findOneOrFail(id);
+
+  delete = (id: string) => this.ormRepository.delete(id);
+
 }
 
 export default CourseReviewRepository;
