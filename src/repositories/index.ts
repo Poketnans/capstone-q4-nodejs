@@ -6,6 +6,7 @@ import ImageProfileRepository from './imageProfile/imageProfile.repository';
 import ProjectRepository from './project/project.repository';
 import CourseReviewRepository from './courseReview/courseReview.repository';
 import CoursePeriodRepository from './coursePeriod/coursePeriod.repository';
+import CourseModeRepository from './courseMode/courseMode.repository';
 
 export {
   UserRepository,
@@ -16,4 +17,5 @@ export {
   ProjectRepository,
   CourseReviewRepository,
   CoursePeriodRepository,
+  CourseModeRepository,
 };
