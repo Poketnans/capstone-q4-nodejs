@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 import Course from '../../entities/Course';
-import { ICourseFindOne, ICourseRepo, ICourseUpdate } from './interfaces';
+import { ICourseRepo, ICourseUpdate } from './interfaces';
 
 class CourseRepository implements ICourseRepo {
   private ormRepository: Repository<Course>;
@@ -11,9 +11,9 @@ class CourseRepository implements ICourseRepo {
 
   getCourses = () => this.ormRepository.find();
 
-  findOneOrFail = (objectId: ICourseFindOne) => this.ormRepository.findOneOrFail({...objectId});
+  findOneOrFail = (id: string) => this.ormRepository.findOneOrFail(id);
 
-  update = (id: string, updatedCourse: ICourseUpdate ) => this.ormRepository.update({id}, updatedCourse)
+  update = (id: string, updatedCourse: ICourseUpdate ) => this.ormRepository.update(id, updatedCourse)
 }
 
 export default CourseRepository;

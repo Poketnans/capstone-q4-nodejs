@@ -34,7 +34,7 @@ export interface ICourse{
 interface ICourseRepo {
   getCourses: () => Promise<Course[]>;
 
-  findOneOrFail: (id: ICourseFindOne) => Promise<Course>;
+  findOneOrFail: (id: string) => Promise<Course>;
   update : (id: string, updatedCourse : ICourseUpdate)=> Promise<UpdateResult>
 }
 export { ICourseRepo, ICourseFindOne };
