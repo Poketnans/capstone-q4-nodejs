@@ -6,8 +6,6 @@ import { validateAuth, validateSchemaMiddleware } from "../middlewares";
 import { createUserController, getOneController, deleteUserController } from "../controllers/User";
 import loginController from "../controllers/User/login";
 
-import { createUserController } from '../controllers/User';
-
 const userRoutes = Router();
 
 userRoutes.get('/profile');

@@ -4,7 +4,7 @@ import { getOneProjectService } from '../../services/projects';
 
 const getOneProjectController = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const { uuid: id } = req.params;
     const project = await getOneProjectService(id);
     return project;
   } catch (e: any) {
