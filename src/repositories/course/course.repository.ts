@@ -11,10 +11,13 @@ class CourseRepository implements ICourseRepo {
 
   saveCourse = (course: Course) => this.ormRepository.save(course);
 
-  getCourses = () => this.ormRepository.find();
-
   findOneOrFail = (objectId: ICourseFindOne) =>
-    this.ormRepository.findOneOrFail({ ...objectId });
+    this.ormRepository.findOneOrFail(objectId);
+
+  deleteOneCourse = (ObjectId: ICourseFindOne) =>
+    this.ormRepository.delete(ObjectId);
+
+  getCourses = () => this.ormRepository.find();
 }
 
 export default CourseRepository;
