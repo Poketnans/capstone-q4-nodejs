@@ -1,18 +1,28 @@
 import { Router } from "express"
-import { updateReviewController } from "../controllers/Review";
-import { validateAuth,validateSchemaMiddleware,validateAuthReviewMiddleware } from "../middlewares";
-import { userReviewUpdate } from "../schemas";
+import { updateReviewController, deleteReviewController } from "../controllers/Review";
+import { validateAuth,validateSchemaMiddleware,validatePermissionReviewMiddleware } from "../middlewares";
+import { userReviewUpdate, reviewSchema } from "../schemas";
+
+
+import createReviewController from '../controllers/Review/createReview';
 
 const reviewsRoutes = Router()
 
 reviewsRoutes.get("")
+
 reviewsRoutes.get("/:uuid")
-reviewsRoutes.post("")
+
+reviewsRoutes.post("", validateAuth, validateSchemaMiddleware(reviewSchema), createReviewController)
+
 reviewsRoutes.patch("/:id", 
   validateAuth,
-  validateAuthReviewMiddleware,
+  validatePermissionReviewMiddleware,
   validateSchemaMiddleware(userReviewUpdate),
   updateReviewController)
-reviewsRoutes.delete("")
+
+reviewsRoutes.delete("/:id", 
+  validateAuth,
+  validatePermissionReviewMiddleware,
+  deleteReviewController);
 
 export default reviewsRoutes

@@ -1,6 +1,7 @@
 import updateReviewController from "./updateReview.controllers";
+import deleteReviewController from "./deleteReview.controlelrs";
 
 export{
-  // eslint-disable-next-line import/prefer-default-export
-  updateReviewController
+  updateReviewController,
+  deleteReviewController
 }

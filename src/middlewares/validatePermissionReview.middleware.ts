@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { CourseReviewRepository } from '../repositories';
 
 
-const validateAuthReviewMiddleware = async (req: Request, res: Response, nextFx: NextFunction) => {
+const validatePertissionReviewMiddleware = async (req: Request, res: Response, nextFx: NextFunction) => {
   
   const idReview = req.params.id;
   
@@ -16,4 +16,4 @@ const validateAuthReviewMiddleware = async (req: Request, res: Response, nextFx:
   return nextFx();
 };
 
-export default validateAuthReviewMiddleware;
+export default validatePertissionReviewMiddleware;

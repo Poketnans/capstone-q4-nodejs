@@ -1,4 +1,4 @@
-import { UpdateResult } from "typeorm";
+import { UpdateResult,DeleteResult } from "typeorm";
 import Course from "../../entities/Course";
 import CourseReview from "../../entities/CourseReview";
 import User from "../../entities/User";
@@ -14,4 +14,5 @@ export interface IReviewUpdate{
 export interface ICourseReviewRepo {
     updateReview : (id: string, updatedReview: IReviewUpdate) => Promise<UpdateResult>;
     findOneOrFail : (id: string,listRelations: string[]) => Promise<CourseReview>;
+    delete : (id: string) => Promise<DeleteResult>
 }
