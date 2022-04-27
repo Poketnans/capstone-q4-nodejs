@@ -34,6 +34,8 @@ export class creatingTables1650461587163 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "user_projects" ADD CONSTRAINT "FK_0ee3d0d7ad84f5f721293132546" FOREIGN KEY ("id_project") REFERENCES "projects"("id") ON DELETE CASCADE ON UPDATE CASCADE`);
         await queryRunner.query(`ALTER TABLE "users_courses" ADD CONSTRAINT "FK_fbfac08e73dc8b81e642e11a514" FOREIGN KEY ("id_user") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE`);
         await queryRunner.query(`ALTER TABLE "users_courses" ADD CONSTRAINT "FK_1f6d8a7fb3bca40ec95f7f5a05e" FOREIGN KEY ("id_course") REFERENCES "courses"("id") ON DELETE CASCADE ON UPDATE CASCADE`);
+        await queryRunner.query(`INSERT INTO "courses_modes" ("name") VALUES ('presencial'), ('online'), ('semi')`);
+        await queryRunner.query(`INSERT INTO "courses_period" ("name") VALUES ('matutino'), ('vespertino'), ('noturno')`);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
