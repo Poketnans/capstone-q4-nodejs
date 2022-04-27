@@ -18,7 +18,7 @@ const courseOwnerVerifyer = async (
       handleError(
         new ErrorHandler(
           httpStatus.UNAUTHORIZED,
-          'You dont have the right permissions'
+          'permission denied'
         ),
         res
       )
