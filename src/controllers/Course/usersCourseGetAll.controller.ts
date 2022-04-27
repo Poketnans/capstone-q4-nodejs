@@ -1,6 +1,6 @@
-import getCoursesService from '../../services/User/getUsersService';
 import { Response, Request } from 'express';
 import httpStatus from 'http-status';
+import getCoursesService from '../../services/User/getUsersService';
 import { handleError } from '../../errors';
 
 const getCoursesController = async (_: Request, res: Response) => {
