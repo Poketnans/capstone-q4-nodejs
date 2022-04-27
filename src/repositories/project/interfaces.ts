@@ -1,4 +1,5 @@
-import User from "../../entities/User";
+import Category from '../../entities/Category';
+import User from '../../entities/User';
 
 export interface IProject {
   id: string;
@@ -7,7 +8,10 @@ export interface IProject {
   created_at: Date;
   starts_at: Date;
   ends_at: Date;
-  user_owner: User
+  id_user_owner?: string;
+  id_category?: string;
+  user_owner?: User;
+  category?: Category;
 }
 
 export interface IProjectRepo {
