@@ -7,7 +7,7 @@ const courseGetOneServices =async (req: Request) => {
   try {
     
     const { id } = req.params;
-    const findCourse = await new CourseRepository().findOneOrFail(id);
+    const findCourse = await new CourseRepository().getOneOrFail(id);
     return findCourse;
 
   } catch (e) {
