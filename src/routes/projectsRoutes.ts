@@ -18,7 +18,7 @@ projectsRoutes.patch(
   updateProjectController
 );
 projectsRoutes.delete('');
-projectsRoutes.patch('/:uuid', validateAuth, projectPermissionMiddleware, updateProjectController);
+projectsRoutes.patch('/:uuid', validateAuth, validateSchemaMiddleware(updateProjectSchema), projectPermissionMiddleware, updateProjectController);
 projectsRoutes.delete('/:uuid', validateAuth, projectPermissionMiddleware);
 
 export default projectsRoutes;
