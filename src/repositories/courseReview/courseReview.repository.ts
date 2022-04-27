@@ -13,6 +13,7 @@ class CourseReviewRepository implements ICourseReviewRepo {
 
   findOneOrFail = (id: string) => this.ormRepository.findOneOrFail(id);
 
+  saveReview = (review) => this.ormRepository.save(review);
 }
 
 export default CourseReviewRepository;
