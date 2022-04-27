@@ -1,3 +1,4 @@
+import httpStatus from 'http-status';
 import { QueryFailedError } from 'typeorm';
 import { ErrorHandler } from '../../errors';
 import { ProjectRepository, UserRepository } from '../../repositories';
@@ -9,12 +10,13 @@ const createProjectService = async (id: string, project: IProject) => {
     // eslint-disable-next-line no-param-reassign
     project.user_owner = projectOwner;
     const newProject = await new ProjectRepository().create(project);
+    delete newProject.user_owner.password
     return newProject;
   } catch (e: any) {
     if (e instanceof QueryFailedError) {
-      throw new ErrorHandler(400, `${e.driverError.detail}`);
+      throw new ErrorHandler(httpStatus.CONFLICT, `${e.driverError.detail}`);
     }
-    throw new ErrorHandler(400, `${e.message}`);
+    throw new ErrorHandler(httpStatus.BAD_REQUEST, `${e.message}`);
   }
 };
 
