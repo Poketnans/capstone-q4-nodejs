@@ -1,5 +1,5 @@
-import { CourseGetOneControler, DeleteCourseControler,updateCourseController } from "../controllers/courses";
 import { Router } from 'express';
+import { CourseGetOneControler, DeleteCourseControler,updateCourseController } from "../controllers/courses";
 import getCoursesController from '../controllers/Course/usersCourseGetAll.controller';
 import { validateSchemaMiddleware, validateAuth } from "../middlewares";
 import { courseUpdateSchema } from "../schemas";

@@ -49,7 +49,7 @@ export default class Course {
     name: 'id_owner_course',
     referencedColumnName: 'id',
   })
-  user_owner: User[];
+  user_owner: User;
 
   @ManyToOne(() => CourseMode)
   @JoinColumn({ name: 'id_mode', referencedColumnName: 'id' })
