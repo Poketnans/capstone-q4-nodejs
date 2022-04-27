@@ -13,5 +13,5 @@ export interface IReviewUpdate{
 
 export interface ICourseReviewRepo {
     updateReview : (id: string, updatedReview: IReviewUpdate) => Promise<UpdateResult>;
-    findOneOrFail : (id: string) => Promise<CourseReview>;
+    findOneOrFail : (id: string,listRelations: string[]) => Promise<CourseReview>;
 }
