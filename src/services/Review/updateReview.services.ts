@@ -6,9 +6,9 @@ const updateReviewService = async (req: Request) => {
   try {
 
     const { id } = req.params;
-    const objectCourseReview = new CourseReviewRepository();
-    await objectCourseReview.updateReview(id,req.validated);
-    return await objectCourseReview.findOneOrFail(id);
+    const objectCourseReviewRepo = new CourseReviewRepository();
+    await objectCourseReviewRepo.updateReview(id,req.validated);
+    return await objectCourseReviewRepo.findOneOrFail(id);
         
   } catch (e) {
 
