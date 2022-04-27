@@ -44,22 +44,22 @@ export default class Course {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { nullable: false })
   @JoinColumn({
     name: 'id_owner_course',
     referencedColumnName: 'id',
   })
   user_owner: User[];
 
-  @ManyToOne(() => CourseMode)
+  @ManyToOne(() => CourseMode, { nullable: false })
   @JoinColumn({ name: 'id_mode', referencedColumnName: 'id' })
   mode: CourseMode;
 
-  @ManyToOne(() => CoursePeriod)
+  @ManyToOne(() => CoursePeriod, { nullable: false })
   @JoinColumn({ name: 'id_period', referencedColumnName: 'id' })
   period: CoursePeriod;
 
-  @ManyToOne(() => Category)
+  @ManyToOne(() => Category, { nullable: false })
   @JoinColumn({ name: 'id_category', referencedColumnName: 'id' })
   category: Category[];
 
