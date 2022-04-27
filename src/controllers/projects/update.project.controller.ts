@@ -10,7 +10,7 @@ const updateProjectController = async (req: Request, res: Response) => {
     await updateProjectService(id, validated);
     return res.status(httpStatus.NO_CONTENT).json();
   } catch (e: unknown) {
-    throw handleError(e, res);
+    return handleError(e, res);
   }
 };
 
