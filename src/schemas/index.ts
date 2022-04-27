@@ -1,3 +1,4 @@
+import createProjectSchema from './create.project.schema';
 import userSchema from "./userCreate.schema";
 import courseUpdateSchema from "./cousesUpdate.schema";
 import updateUserSchema from './updateUserSchema';
@@ -9,6 +10,7 @@ export {
   courseUpdateSchema,
   updateUserSchema,
   userReviewUpdate,
-  reviewSchema
-}
+  reviewSchema,
+  createProjectSchema
+};
 
