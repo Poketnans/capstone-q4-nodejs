@@ -8,6 +8,7 @@ const updateCourseService = async (req: Request) => {
     const { id } = req.params;
     const objectCourseRepo = new CourseRepository();
     const updatedCourse = req.validated;
+   
 
     await objectCourseRepo.update(id,updatedCourse);
     return await objectCourseRepo.findOneOrFail(id);

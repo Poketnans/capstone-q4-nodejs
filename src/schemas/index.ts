@@ -1,6 +1,7 @@
 import userSchema from "./userCreate.schema";
+import courseUpdateSchema from "./cousesUpdate.schema";
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
-  userSchema
+  userSchema,
+  courseUpdateSchema
 }

@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import getCoursesController from '../controllers/Course/usersCourseGetAll.controller';
 import { CourseGetOneControler, updateCourseController } from '../controllers/courses';
+import { validateSchemaMiddleware, validateAuth } from "../middlewares";
+import { courseUpdateSchema } from "../schemas";
 
 const coursesRoutes = Router();
 
@@ -10,7 +12,11 @@ coursesRoutes.get('/:id', CourseGetOneControler);
 
 coursesRoutes.post('');
 
-coursesRoutes.patch('/:id', updateCourseController);
+coursesRoutes.patch('/:id', 
+  validateAuth,
+  validateSchemaMiddleware(courseUpdateSchema),
+  updateCourseController);
+
 coursesRoutes.delete('');
 
 export default coursesRoutes;
