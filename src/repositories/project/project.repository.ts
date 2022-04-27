@@ -10,6 +10,9 @@ class ProjectRepository implements IProjectRepo {
   }
   
   create = (project: IProject) => this.ormRepository.save(project);
+
+  getOne = (id: string, relationsWanted?: string[]) =>
+    this.ormRepository.findOneOrFail(id, { relations: relationsWanted });
 }
 
 export default ProjectRepository;

@@ -1,5 +1,5 @@
-import { CourseGetOneControler, DeleteCourseControler } from "../controllers/courses";
 import { Router } from 'express';
+import { CourseGetOneControler, DeleteCourseControler } from "../controllers/courses";
 import getCoursesController from '../controllers/Course/usersCourseGetAll.controller';
 
 const coursesRoutes = Router();

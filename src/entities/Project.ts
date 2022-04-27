@@ -31,14 +31,14 @@ export default class Project {
   @Column()
   ends_at: Date;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { nullable: false })
   @JoinColumn({ name: 'id_user_owner', referencedColumnName: 'id' })
   user_owner: User;
 
   @ManyToMany(() => User, (user) => user.projects_participated_in)
   contributors: User[];
 
-  @ManyToOne(() => Category)
+  @ManyToOne(() => Category, { nullable: false })
   @JoinColumn({ name: 'id_category', referencedColumnName: 'id' })
   category: Category;
 }

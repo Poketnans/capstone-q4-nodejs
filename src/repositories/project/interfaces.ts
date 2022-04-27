@@ -16,4 +16,5 @@ export interface IProject {
 
 export interface IProjectRepo {
   create: (project: IProject) => Promise<IProject>;
+  getOne: (id: string, relations?: string[]) => Promise<IProject>;
 }
