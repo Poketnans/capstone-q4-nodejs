@@ -17,16 +17,24 @@ const devConfig = {
 } as ConnectionOptions;
 
 const prodConfig = {
-  type: 'postgres',
+  ...devConfig,
   url: process.env.DB_URI_PROD,
-  logging: false,
   ssl: { rejectUnauthorized: false },
-  entities: [`${path.join(__dirname, '../entities/**/*.*')}`],
-  migrations: [`${path.join(__dirname, '../migrations/**/*.*')}`],
-  cli: {
-    entitiesDir: path.join(__dirname, '../entities'),
-    migrationsDir: path.join(__dirname, '../migrations'),
-  },
 } as ConnectionOptions;
 
-export default process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
+const testConfig = {
+  ...devConfig,
+  url: process.env.DB_URI_TEST,
+  dropSchema: true,
+  migrationsRun: true,
+} as ConnectionOptions;
+
+const { NODE_ENV } = process.env;
+
+const ormConfigs = {
+  development: devConfig,
+  production: prodConfig,
+  test: testConfig,
+};
+
+export default ormConfigs[NODE_ENV];
