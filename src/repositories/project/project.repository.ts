@@ -8,6 +8,9 @@ class ProjectRepository implements IProjectRepo {
   constructor() {
     this.ormRepository = getRepository(Project);
   }
+
+  getOne = (id: string, relationsWanted?: string[]) =>
+    this.ormRepository.findOneOrFail(id, { relations: relationsWanted });
 }
 
 export default ProjectRepository;
