@@ -1,6 +1,6 @@
 import { IEndpoints } from './interfaces';
 
-const prefix = '/api';
+const prefix = '';
 const usersEndpoint = `${prefix}/users`;
 
 const apiEndpoints: IEndpoints = {
