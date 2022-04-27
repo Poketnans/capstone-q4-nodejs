@@ -1,6 +1,9 @@
-import CourseGetOneServices from "./getOne.services";
+import updateCourseService from "./update.services";
+import courseGetOneServices from "./getOne.services";
 import DeleteCourseService from "./deleteOne.services";
 
 export {
-  CourseGetOneServices, DeleteCourseService
-}
+  updateCourseService,
+  courseGetOneServices,
+  DeleteCourseService
+};
