@@ -32,9 +32,12 @@ export interface ICourse{
 }
 
 interface ICourseRepo {
+  deleteOneCourse : (ObjectId: ICourseFindOne) => Promise<any>;
+  
   getCourses: () => Promise<Course[]>;
 
   findOneOrFail: (id: string) => Promise<Course>;
   update : (id: string, updatedCourse : ICourseUpdate)=> Promise<UpdateResult>
 }
+
 export { ICourseRepo, ICourseFindOne };

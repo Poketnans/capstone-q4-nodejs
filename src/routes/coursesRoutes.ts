@@ -1,6 +1,6 @@
+import { CourseGetOneControler, DeleteCourseControler,updateCourseController } from "../controllers/courses";
 import { Router } from 'express';
 import getCoursesController from '../controllers/Course/usersCourseGetAll.controller';
-import { CourseGetOneControler, updateCourseController } from '../controllers/courses';
 import { validateSchemaMiddleware, validateAuth } from "../middlewares";
 import { courseUpdateSchema } from "../schemas";
 
@@ -17,6 +17,10 @@ coursesRoutes.patch('/:id',
   validateSchemaMiddleware(courseUpdateSchema),
   updateCourseController);
 
-coursesRoutes.delete('');
+coursesRoutes.delete("/:uuid", 
+// será adicionado o middleware de auth
+  DeleteCourseControler
+);
+
 
 export default coursesRoutes;
