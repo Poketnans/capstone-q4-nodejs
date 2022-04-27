@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { createProjecController } from "../controllers/projects";
-import { validateAuth, validateSchemaMiddleware } from "../middlewares";
 import { createProjectSchema } from "../schemas";
+import { Router } from "express"
+import { validateAuth, projectPermissionMiddleware, validateSchemaMiddleware } from "../middlewares"
 
 const projectsRoutes = Router();
 
@@ -13,7 +14,7 @@ projectsRoutes.post(
   validateSchemaMiddleware(createProjectSchema),
   createProjecController
 );
-projectsRoutes.patch("");
-projectsRoutes.delete("");
+projectsRoutes.patch("/:uuid", validateAuth, projectPermissionMiddleware)
+projectsRoutes.delete("/:uuid", validateAuth, projectPermissionMiddleware)
 
 export default projectsRoutes;
