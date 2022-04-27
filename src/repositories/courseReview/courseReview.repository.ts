@@ -8,6 +8,8 @@ class CourseReviewRepository implements ICourseReviewRepo {
   constructor() {
     this.ormRepository = getRepository(CourseReview);
   }
+
+  saveReview = (review) => this.ormRepository.save(review);
 }
 
 export default CourseReviewRepository;
