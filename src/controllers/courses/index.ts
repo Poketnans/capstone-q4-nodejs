@@ -1,8 +1,13 @@
-import CourseGetOneControler from "./getOne.controllers";
-import DeleteCourseControler from "./deleteCourse.controller";
+import CourseGetOneControler from './getOne.controllers';
+import DeleteCourseControler from './deleteCourse.controller';
+import updateCourseController from './update.controllers';
+import createCourseController from './courseCreate.controller';
+import getCoursesController from './courseGetAll.controller';
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
+  updateCourseController,
+  DeleteCourseControler,
   CourseGetOneControler,
-  DeleteCourseControler
-}
+  createCourseController,
+  getCoursesController,
+};

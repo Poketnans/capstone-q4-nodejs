@@ -1,0 +1,329 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Sumé Free Share Documentation",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Dev Url"
+    },
+    {
+      "url": "https://sume-free-share.herokuapp.com",
+      "description": "Deploy Url"
+    }
+  ],
+  "paths": {
+    "/users/register": {
+      "post": {
+        "description": "Rota responsável pelo registro do usuário.",
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRegisterBody"
+              },
+              "examples": {
+                "UserRegisterBody": {
+                  "$ref": "#/components/examples/UserRegisterBody"
+                },
+                "UserRegisterBodyEmployed": {
+                  "$ref": "#/components/examples/UserRegisterBodyEmployed"
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {},
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "CREATED",
+            "content": {
+              "aplication/json": {
+                "schema": { "$ref": "#/components/schemas/User" },
+                "examples": {
+                  "User": {
+                    "$ref": "#/components/examples/User"
+                  },
+                  "UserEmployed": {
+                    "$ref": "#/components/examples/UserEmployed"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          }
+        }
+      }
+    },
+    "/users": {
+      "patch": {
+        "description": "Rota responsável pelo update do usuário.",
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdateBody"
+              },
+              "examples": {
+                "UserUpdateBody": {
+                  "$ref": "#/components/examples/UserUpdateBody"
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {},
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "204": { "$ref": "#/components/responses/NoContent" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "409": { "$ref": "#/components/responses/Conflict" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "employed": {
+            "type": "boolean",
+            "default": false
+          },
+          "profile_image": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "projects_participated_in": {
+            "type": "array"
+          },
+          "own_projects": {
+            "type": "array"
+          },
+          "followers": {
+            "type": "array"
+          },
+          "following": {
+            "type": "array"
+          },
+          "assigned_courses": {
+            "type": "array"
+          },
+          "owned_courses": {
+            "type": "array"
+          }
+        }
+      },
+      "UserRegisterBody": {
+        "type": "object",
+        "required": ["name", "email", "password"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Jeanette Carter"
+          },
+          "email": {
+            "type": "string",
+            "example": "jeanette@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456",
+            "minLength": 6
+          },
+          "employed": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "UserUpdateBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Jeanne d'Arc"
+          },
+          "email": {
+            "type": "string",
+            "example": "jalter@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "Pass@1234",
+            "minLength": 6
+          },
+          "employed": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      }
+    },
+    "examples": {
+      "UserRegisterBody": {
+        "value": {
+          "name": "Simon Ziemann",
+          "email": "simon@mail.com",
+          "password": "123456"
+        }
+      },
+      "UserRegisterBodyEmployed": {
+        "value": {
+          "name": "Jeanette Carter",
+          "email": "jeanette@mail.com",
+          "password": "123456",
+          "employed": true
+        }
+      },
+      "UserUpdateBody": {
+        "value": {
+          "name": "Cleiton Guerra",
+          "email": "cleitonguerra@mail.com",
+          "password": "Pass@1234",
+          "employed": true
+        }
+      },
+      "User": {
+        "value": {
+          "id": "8912e76f-1e28-4e29-8ccf-97ec6556905e",
+          "name": "Simon Ziemann",
+          "email": "simon@mail.com",
+          "employed": false,
+          "profile_image": "https://image.ext",
+          "created_at": "date",
+          "updated_at": "date",
+          "projects_participated_in": [],
+          "own_projects": [],
+          "followers": [],
+          "following": [],
+          "assigned_courses": [],
+          "owned_courses": []
+        }
+      },
+      "UserEmployed": {
+        "value": {
+          "id": "0ace079a-8dda-406d-a74f-ca823fc35236",
+          "name": "Jeanette Carter",
+          "email": "jeanette@mail.com",
+          "employed": true,
+          "profile_image": "https://image.ext",
+          "created_at": "date",
+          "updated_at": "date",
+          "projects_participated_in": [],
+          "own_projects": [],
+          "followers": [],
+          "following": [],
+          "assigned_courses": [],
+          "owned_courses": []
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "BAD REQUEST",
+        "content": {
+          "application/json": {
+            "examples": {
+              "MissingFields": {
+                "value": {
+                  "error": {
+                    "error": ["<field_1> is required", "<field_2> is required"]
+                  }
+                }
+              },
+              "MalformedPassword": {
+                "value": {
+                  "error": "password must have min 6 chars"
+                }
+              },
+              "MalformedEmail": {
+                "value": {
+                  "error": "invalid email format"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "CONFLICT",
+        "content": {
+          "application/json": {
+            "example": {
+              "error": "Key (field)=(field) already exists"
+            }
+          }
+        }
+      },
+      "NoContent": {
+        "description": "NoContent"
+      },
+      "Unauthorized": {
+        "description": "UNAUTHORIZED",
+        "content": {
+          "aplication/json": {
+            "examples": {
+              "Token not informed": {
+                "value": {
+                  "error": "missing authorization header"
+                }
+              },
+              "Invalid token": {
+                "value": {
+                  "error": "invalid token"
+                }
+              },
+              "Missing token": {
+                "value": {
+                  "error": "token missing"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "FORBIDDEN",
+        "content": {
+          "aplication/json": {
+            "example": {
+              "Token not informed": {
+                "value": {
+                  "error": "permission denied"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,25 +1,34 @@
-import { IUser } from '../user/interfaces';
+import { UpdateResult } from 'typeorm';
 import Course from '../../entities/Course';
-import CourseMode from '../../entities/CourseMode';
-import CoursePeriod from '../../entities/CoursePeriod';
-import Category from '../../entities/Category';
 
-interface ICourseQuery {
+interface ICourse {
   title?: string;
-  user_owner: IUser;
   address?: string;
   starts_at?: Date;
   ends_at?: Date;
   start_time?: Date;
   end_time?: Date;
-  mode?: CourseMode;
-  period?: CoursePeriod;
-  category?: Category;
+  id_mode?: string;
+  id_period?: string;
+  id_category?: string;
   certificate?: boolean;
 }
 
 interface ICourseFindOne {
   id: string;
+}
+
+interface ICourseUpdate {
+  title?: string;
+  address?: string;
+  id_mode?: string;
+  id_period?: string;
+  starts_at?: Date;
+  ends_at?: Date;
+  start_time?: Date;
+  end_time?: Date;
+  id_category?: string;
+  certificate?: boolean;
 }
 
 interface ICourseRepo {
@@ -29,7 +38,8 @@ interface ICourseRepo {
 
   getCourses: () => Promise<Course[]>;
 
-  findOneOrFail: (id: ICourseFindOne) => Promise<Course>;
+  getOneOrFail: (id: string) => Promise<Course>;
+  update: (id: string, updatedCourse: ICourseUpdate) => Promise<UpdateResult>;
 }
 
-export { ICourseRepo, ICourseFindOne, ICourseQuery };
+export { ICourseRepo, ICourseFindOne, ICourse, ICourseUpdate };

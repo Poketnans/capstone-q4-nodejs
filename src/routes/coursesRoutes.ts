@@ -1,22 +1,36 @@
 import { Router } from 'express';
+import courseSchema from '../schemas/courseCreate.schema';
+
 import {
   CourseGetOneControler,
   DeleteCourseControler,
+  updateCourseController,
+  getCoursesController,
+  createCourseController,
 } from '../controllers/courses';
-import createCourseController from '../controllers/Course/courseCreate.controller';
-import { validateSchemaMiddleware } from '../middlewares';
-import courseSchema from '../schemas/courseCreate.schema';
-import getCoursesController from '../controllers/Course/usersCourseGetAll.controller';
+
+import { validateSchemaMiddleware, validateAuth } from '../middlewares';
+import { courseUpdateSchema } from '../schemas';
 
 const coursesRoutes = Router();
 
 coursesRoutes.get('', getCoursesController);
 // será adicionado o middleware de auth
-coursesRoutes.get('/:uuid', CourseGetOneControler);
+
+coursesRoutes.get('/:id', CourseGetOneControler);
+
 coursesRoutes.post(
   '',
+  validateAuth,
   validateSchemaMiddleware(courseSchema),
   createCourseController
+);
+
+coursesRoutes.patch(
+  '/:id',
+  validateAuth,
+  validateSchemaMiddleware(courseUpdateSchema),
+  updateCourseController
 );
 
 coursesRoutes.delete(
@@ -24,7 +38,5 @@ coursesRoutes.delete(
   // será adicionado o middleware de auth
   DeleteCourseControler
 );
-
-coursesRoutes.patch('');
 
 export default coursesRoutes;
