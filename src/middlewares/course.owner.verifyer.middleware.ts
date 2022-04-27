@@ -14,15 +14,8 @@ const courseOwnerVerifyer = async (
     id,
   });
   if (targetCourse.user_owner.id !== user.id) {
-    return next(
-      handleError(
-        new ErrorHandler(
-          httpStatus.UNAUTHORIZED,
-          'permission denied'
-        ),
-        res
-      )
-    );
+    return next(new
+      ErrorHandler(httpStatus.UNAUTHORIZED,'permission denied'));
   }
   return next();
 };
