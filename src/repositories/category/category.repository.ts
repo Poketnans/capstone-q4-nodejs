@@ -8,6 +8,8 @@ class CategoryRepository implements ICategoryRepo {
   constructor() {
     this.ormRepository = getRepository(Category);
   }
+
+  getCategory = (id: string) => this.ormRepository.findOneOrFail(id);
 }
 
 export default CategoryRepository;
