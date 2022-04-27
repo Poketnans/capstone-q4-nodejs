@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request } from "express";
 import { EntityNotFoundError } from "typeorm";
 import { ErrorHandler } from "../../errors";
 import { CourseRepository } from "../../repositories";

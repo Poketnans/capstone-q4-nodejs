@@ -8,12 +8,15 @@ class CourseRepository implements ICourseRepo {
   constructor() {
     this.ormRepository = getRepository(Course);
   }
-
+  
+  deleteOneCourse = (ObjectId: ICourseFindOne) => this.ormRepository.delete(ObjectId);
+  
   getCourses = () => this.ormRepository.find();
 
   getOneOrFail = (id: string) => this.ormRepository.findOneOrFail(id);
 
-  update = (id: string, updatedCourse: ICourseUpdate ) => this.ormRepository.update(id, updatedCourse)
+  update = (id: string, updatedCourse: ICourseUpdate ) => this.ormRepository.update(id, updatedCourse);
+
 }
 
 export default CourseRepository;
