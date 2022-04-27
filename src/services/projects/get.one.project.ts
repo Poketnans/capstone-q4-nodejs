@@ -4,7 +4,7 @@ import { ProjectRepository } from '../../repositories';
 
 const getOneProjectService = async (id: string) => {
   try {
-    const foundProject = await new ProjectRepository().getOne(id);
+    const foundProject = await new ProjectRepository().getOne(id, ['user_owner']);
     return foundProject;
   } catch (e: any) {
     throw new ErrorHandler(httpStatus.NOT_FOUND, 'project not found');

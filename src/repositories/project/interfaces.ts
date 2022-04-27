@@ -8,5 +8,5 @@ export interface Iproject {
 }
 
 export interface IProjectRepo {
-  getOne: (id: string) => Promise<Iproject>;
+  getOne: (id: string, relations?: string[]) => Promise<Iproject>;
 }
