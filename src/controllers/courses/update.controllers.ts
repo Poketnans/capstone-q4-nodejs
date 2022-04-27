@@ -6,8 +6,8 @@ import {updateCourseService} from "../../services/courses";
 const updateCourseController = async ( req: Request, res: Response ) => {
   try {
 
-    const course = await updateCourseService(req);
-    return res.status(200).json(course);
+    await updateCourseService(req);
+    return res.status(204).json("");
 
   } catch (e) {
 
