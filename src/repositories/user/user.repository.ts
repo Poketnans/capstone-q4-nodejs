@@ -14,6 +14,7 @@ class UserRepository implements IUserRepo {
 
   getUsers = () => this.ormRepository.find();
 
+
   getOneUser = (userInfo: string, relations?: string[]) => {
     if (userInfo.includes('@')) {
       return this.ormRepository.findOne({ email: userInfo }, { relations });
