@@ -13,16 +13,18 @@ class UserRepository implements IUserRepo {
   saveUser = (user: IUser) => this.ormRepository.save(user);
 
   getUsers = () => this.ormRepository.find();
-  getOneUser = (userInfo: string) => {
+
+  getOneUser = (userInfo: string, relations?: string[]) => {
     if (userInfo.includes('@')) {
-      return this.ormRepository.findOne({ email: userInfo });
+      return this.ormRepository.findOne({ email: userInfo }, { relations });
     }
-    return this.ormRepository.findOne({ id: userInfo });
+    return this.ormRepository.findOne({ id: userInfo }, { relations });
   };
 
   updateUser = (userUpdated: IUserQuery, id: string) =>
     this.ormRepository.update(id, userUpdated);
-  getUserLogin = (email: string) => this.ormRepository.findOne({email});
+
+  getUserLogin = (email: string) => this.ormRepository.findOne({ email });
 
   deleteUser = (userId: string) => this.ormRepository.delete(userId);
 }
