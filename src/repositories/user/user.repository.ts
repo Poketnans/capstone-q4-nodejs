@@ -14,11 +14,12 @@ class UserRepository implements IUserRepo {
 
   getUsers = () => this.ormRepository.find();
 
-  getOneUser = (userInfo: string) => {
+
+  getOneUser = (userInfo: string, relations?: string[]) => {
     if (userInfo.includes('@')) {
-      return this.ormRepository.findOne({ email: userInfo });
+      return this.ormRepository.findOne({ email: userInfo }, { relations });
     }
-    return this.ormRepository.findOne({ id: userInfo });
+    return this.ormRepository.findOne({ id: userInfo }, { relations });
   };
 
   updateUser = (userUpdated: IUserQuery, id: string) =>
