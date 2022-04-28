@@ -2,7 +2,10 @@ import { Router } from 'express';
 import getUsersController from '../controllers/User/getAll';
 
 import { updateUserSchema, userSchema, loginSchema } from '../schemas';
+<<<<<<< HEAD
 import loginController from '../controllers/User/login';
+=======
+>>>>>>> 0feea81a1429b8ebf2aa199787f6d975f0ee4b7e
 
 import {
   updateUserImageValidator,
@@ -48,3 +51,5 @@ userRoutes.patch(
 );
 
 export default userRoutes;
+
+
