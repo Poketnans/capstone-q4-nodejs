@@ -1,6 +1,11 @@
 import { Router } from 'express';
-import { updateProjectController } from '../controllers/projects';
 import updateProjectSchema from '../schemas/update.project.schema';
+import {
+  createProjecController,
+  getOneProjectController,
+  updateProjectController
+} from '../controllers/projects';
+import { createProjectSchema } from '../schemas';
 import {
   validateAuth,
   projectPermissionMiddleware,
@@ -10,14 +15,13 @@ import {
 const projectsRoutes = Router();
 
 projectsRoutes.get('');
-projectsRoutes.get('/:uuid');
-projectsRoutes.post('');
-projectsRoutes.patch(
-  '/:uuid',
-  validateSchemaMiddleware(updateProjectSchema),
-  updateProjectController
+projectsRoutes.get('/:uuid', validateAuth, getOneProjectController);
+projectsRoutes.post(
+  '',
+  validateAuth,
+  validateSchemaMiddleware(createProjectSchema),
+  createProjecController
 );
-projectsRoutes.delete('');
 projectsRoutes.patch('/:uuid', validateAuth, validateSchemaMiddleware(updateProjectSchema), projectPermissionMiddleware, updateProjectController);
 projectsRoutes.delete('/:uuid', validateAuth, projectPermissionMiddleware);
 

@@ -1,4 +1,5 @@
 import updateProjectService from './project.update.service';
+import createProjectService from './create.project.service';
+import getOneProjectService from './get.one.project';
 
-// eslint-disable-next-line import/prefer-default-export
-export { updateProjectService };
+export { createProjectService, getOneProjectService, updateProjectService };

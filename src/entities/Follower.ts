@@ -7,11 +7,11 @@ export default class Follower {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, {nullable: false})
   @JoinColumn({ name: 'id_follower', referencedColumnName: 'id' })
   follower: User;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { nullable: false })
   @JoinColumn({ name: 'id_following', referencedColumnName: 'id' })
   target: User;
 }

@@ -9,18 +9,13 @@ const courseOwnerVerifyer = async (
   next: NextFunction
 ) => {
   const { user } = req;
-  const { id } = req.params;
+  const { uuid: id } = req.params;
   const targetCourse = await new CourseRepository().findOneOrFail({
     id,
   });
-  if (targetCourse.user_owner[0].id !== user.id) {
-    throw handleError(
-      new ErrorHandler(
-        httpStatus.UNAUTHORIZED,
-        'You dont have the right permissions'
-      ),
-      res
-    );
+  if (targetCourse.user_owner.id !== user.id) {
+    return next(new
+      ErrorHandler(httpStatus.UNAUTHORIZED,'permission denied'));
   }
   return next();
 };

@@ -1,4 +1,5 @@
 import updateProjectController from './update.project.controller';
+import createProjecController from './create.project.controller';
+import getOneProjectController from './projects.get.one';
 
-// eslint-disable-next-line import/prefer-default-export
-export { updateProjectController };
+export { createProjecController, getOneProjectController, updateProjectController };
