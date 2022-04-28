@@ -4,6 +4,7 @@ import CategoryNotFoundError from './categoryNotFound.error';
 import ModeNotFoundError from './modeNotFound.error';
 import PeriodNotFoundError from './periodNotFound.error';
 import CourseTitleAlreadyRegisteredError from './courseTitleAlreadyRegistered.error';
+import UserNotFoundError from './UserNotFound.error';
 
 export {
   ErrorHandler,
@@ -13,4 +14,5 @@ export {
   ModeNotFoundError,
   PeriodNotFoundError,
   CourseTitleAlreadyRegisteredError,
+  UserNotFoundError,
 };
