@@ -1,3 +1,4 @@
+import { UpdateResult } from 'typeorm';
 import Category from '../../entities/Category';
 import User from '../../entities/User';
 
@@ -15,6 +16,10 @@ export interface IProject {
 }
 
 export interface IProjectRepo {
+  update: (
+    id: string,
+    updatedProject: Partial<IProject>
+  ) => Promise<UpdateResult>;
   create: (project: IProject) => Promise<IProject>;
   getOne: (id: string, relations?: string[]) => Promise<IProject>;
 }

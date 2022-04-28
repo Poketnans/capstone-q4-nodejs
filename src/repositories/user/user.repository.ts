@@ -24,7 +24,7 @@ class UserRepository implements IUserRepo {
   updateUser = (userUpdated: IUserQuery, id: string) =>
     this.ormRepository.update(id, userUpdated);
 
-  getUserLogin = (email: string) => this.ormRepository.findOne({email});
+  getUserLogin = (email: string) => this.ormRepository.findOne({ email });
 
   deleteUser = (userId: string) => this.ormRepository.delete(userId);
 }

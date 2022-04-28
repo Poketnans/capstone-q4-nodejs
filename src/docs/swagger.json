@@ -88,13 +88,33 @@
         },
         "responses": {
           "204": { "$ref": "#/components/responses/NoContent" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
           "401": { "$ref": "#/components/responses/Unauthorized" },
           "409": { "$ref": "#/components/responses/Conflict" }
         }
       }
     },
+    "/users/image": {
+      "patch": {
+        "requestBody": {
+          "content": {
+            "multipar/form-data": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": { "$ref": "#/components/responses/NoContent" },
+          "415": { "$ref": "#/components/responses/UnsuportedMediaType" }
+        }
+      }
+    },
     "/project/:uuid": {
       "post": {
+        "description": "Rota responsável pela criação de projetos",
         "requestBody": {
           "content": {
             "aplication/json": {
@@ -105,9 +125,8 @@
           }
         },
         "responses": {
-          "201": { "$ref": "#/components/responses/NoContent" },
-          "400": { "$ref": "#/components/responses/ProjectBadRequest" },
-          "409": { "$ref": "#/components/responses/Conflict" }
+          "201": { "$ref": "#/components/responses/Success" },
+          "400": { "$ref": "#/components/responses/ProjectBadRequest" }
         }
       }
     }
@@ -403,6 +422,20 @@
               "MissingFields": {
                 "value": {
                   "error": ["<field_1> is required", "<field_2> is required"]
+                }
+              }
+            }
+          }
+        }
+      },
+      "UnsuportedMediaType": {
+        "description": "UNSUPORTED MEDIA TYPE",
+        "content": {
+          "application/json": {
+            "examples": {
+              "Unsuported media type sended": {
+                "value": {
+                  "error": "allowed mymetypes: 'image/jpeg', 'image/png','image/svg+xml', sended mimetype: image/gif"
                 }
               }
             }

@@ -1,7 +1,9 @@
 import { Router } from 'express';
+import updateProjectSchema from '../schemas/update.project.schema';
 import {
   createProjecController,
   getOneProjectController,
+  updateProjectController
 } from '../controllers/projects';
 import { createProjectSchema } from '../schemas';
 import {
@@ -20,7 +22,7 @@ projectsRoutes.post(
   validateSchemaMiddleware(createProjectSchema),
   createProjecController
 );
-projectsRoutes.patch('/:uuid', validateAuth, projectPermissionMiddleware);
+projectsRoutes.patch('/:uuid', validateAuth, validateSchemaMiddleware(updateProjectSchema), projectPermissionMiddleware, updateProjectController);
 projectsRoutes.delete('/:uuid', validateAuth, projectPermissionMiddleware);
 
 export default projectsRoutes;

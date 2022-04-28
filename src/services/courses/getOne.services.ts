@@ -3,11 +3,11 @@ import { EntityNotFoundError } from "typeorm";
 import { ErrorHandler } from "../../errors";
 import { CourseRepository } from "../../repositories";
 
-const CourseGetOneServices =async (req: Request) => {
+const courseGetOneServices =async (req: Request) => {
   try {
     
-    const { uuid } = req.params;
-    const findCourse = await new CourseRepository().findOneOrFail({"id": uuid});
+    const { id } = req.params;
+    const findCourse = await new CourseRepository().getOneOrFail(id);
     return findCourse;
 
   } catch (e) {
@@ -20,4 +20,4 @@ const CourseGetOneServices =async (req: Request) => {
         
   }
 }
-export default CourseGetOneServices;
+export default courseGetOneServices;

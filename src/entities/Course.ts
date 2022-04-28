@@ -38,6 +38,9 @@ export default class Course {
   @Column()
   end_time: Date;
 
+  @Column()
+  certificate: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 
@@ -61,7 +64,7 @@ export default class Course {
 
   @ManyToOne(() => Category, { nullable: false })
   @JoinColumn({ name: 'id_category', referencedColumnName: 'id' })
-  category: Category[];
+  category: Category;
 
   @OneToMany(() => Review, (userReview) => userReview.id)
   reviews: [];
