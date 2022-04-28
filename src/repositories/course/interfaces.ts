@@ -62,7 +62,7 @@ interface ICourseRepo {
 
   getCourses: () => Promise<Course[]>;
 
-  getOneOrFail: (id: string) => Promise<Course>;
+  getOneOrFail: (id: string, listRelations: string[]) => Promise<Course>;
   update: (id: string, updatedCourse: ICourseUpdate) => Promise<UpdateResult>;
 }
 
