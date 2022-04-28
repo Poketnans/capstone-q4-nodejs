@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import updateUserController from '../controllers/User/updateUser';
 import getUsersController from '../controllers/User/getAll';
-import { updateUserSchema, userSchema } from '../schemas';
+import { updateUserSchema, userSchema, loginSchema } from '../schemas';
 import { validateAuth, validateSchemaMiddleware } from "../middlewares";
 import { createUserController, getOneController, deleteUserController } from "../controllers/User";
 import loginController from "../controllers/User/login";
@@ -20,7 +20,9 @@ userRoutes.post("/register",
   validateSchemaMiddleware(userSchema),
   createUserController
 );
-userRoutes.post("/login", loginController);
+userRoutes.post("/login", 
+  validateSchemaMiddleware(loginSchema),
+  loginController);
 userRoutes.post("/signup");
 userRoutes.post("/logout");
 userRoutes.delete("/:uuid", validateAuth, deleteUserController);
