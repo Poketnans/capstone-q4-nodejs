@@ -79,17 +79,33 @@
                   "$ref": "#/components/examples/UserUpdateBody"
                 }
               }
-            },
-            "multipart/form-data": {
-              "schema": {},
-              "example": {}
             }
           }
         },
         "responses": {
           "204": { "$ref": "#/components/responses/NoContent" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
           "401": { "$ref": "#/components/responses/Unauthorized" },
           "409": { "$ref": "#/components/responses/Conflict" }
+        }
+      }
+    },
+    "/users/image": {
+      "patch": {
+        "requestBody": {
+          "content": {
+            "multipar/form-data": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": { "$ref": "#/components/responses/NoContent" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
         }
       }
     }
