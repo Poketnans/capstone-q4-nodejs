@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { handleError } from '../../errors';
-import createCourseService from '../../services/Course/createCourseService';
+import createCourseService from '../../services/courses/createCourseService';
 
 const createCourseController = async (req: Request, res: Response) => {
   try {
