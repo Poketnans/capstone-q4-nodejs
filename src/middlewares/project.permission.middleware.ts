@@ -16,10 +16,7 @@ const projectPermissionMiddleware = async (
   if (targetProject.user_owner.id !== user.id) {
     return next(
       handleError(
-        new ErrorHandler(
-          httpStatus.UNAUTHORIZED,
-          'permission denied'
-        ),
+        new ErrorHandler(httpStatus.UNAUTHORIZED, 'permission denied'),
         res
       )
     );

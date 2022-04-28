@@ -25,7 +25,7 @@ const validateAuth = (req: Request, res: Response, nextFx: NextFunction) => {
       });
     }
 
-    req.user = decoded;
+    req.user = decoded.user;
 
     return nextFx();
   });

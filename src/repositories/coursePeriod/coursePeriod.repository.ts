@@ -10,6 +10,8 @@ class CoursePeriodRepository implements ICoursePeriodRepo {
   }
 
   getCoursePeriods = () => this.ormRepository.find();
+
+  getOneMode = (id: string) => this.ormRepository.findOne(id);
 }
 
 export default CoursePeriodRepository;
