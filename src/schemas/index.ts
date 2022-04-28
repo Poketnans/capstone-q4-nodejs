@@ -4,6 +4,7 @@ import courseUpdateSchema from "./cousesUpdate.schema";
 import updateUserSchema from './updateUserSchema';
 import userReviewUpdate from './userReviewUpdateSchema';
 import reviewSchema from './reviewSchema';
+import loginSchema from './loginSchema';
 
 export {
   userSchema,
@@ -11,6 +12,7 @@ export {
   updateUserSchema,
   reviewSchema,
   userReviewUpdate,
-  createProjectSchema
+  createProjectSchema,
+  loginSchema
 };
 
