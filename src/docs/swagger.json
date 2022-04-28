@@ -44,9 +44,7 @@
             "description": "CREATED",
             "content": {
               "aplication/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
+                "schema": { "$ref": "#/components/schemas/User" },
                 "examples": {
                   "User": {
                     "$ref": "#/components/examples/User"
@@ -64,6 +62,52 @@
           "409": {
             "$ref": "#/components/responses/Conflict"
           }
+        }
+      }
+    },
+    "/users": {
+      "patch": {
+        "description": "Rota responsável pelo update do usuário.",
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdateBody"
+              },
+              "examples": {
+                "UserUpdateBody": {
+                  "$ref": "#/components/examples/UserUpdateBody"
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {},
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "204": { "$ref": "#/components/responses/NoContent" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "409": { "$ref": "#/components/responses/Conflict" }
+        }
+      }
+    },
+    "/project/:uuid": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectRegisterBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "$ref": "#/components/responses/NoContent" },
+          "400": { "$ref": "#/components/responses/ProjectBadRequest" },
+          "409": { "$ref": "#/components/responses/Conflict" }
         }
       }
     }
@@ -137,6 +181,54 @@
             "default": false
           }
         }
+      },
+      "UserUpdateBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Jeanne d'Arc"
+          },
+          "email": {
+            "type": "string",
+            "example": "jalter@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "Pass@1234",
+            "minLength": 6
+          },
+          "employed": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "ProjectRegisterBody": {
+        "type": "object",
+        "required": ["name", "email", "password"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Aplicação web com react e axios"
+          },
+          "description": {
+            "type": "string",
+            "example": "Aplicação usando o framework react e a biblioteca axios"
+          },
+          "starts_at": {
+            "type": "string",
+            "example": "2022-04-29"
+          },
+          "ends_at": {
+            "type": "string",
+            "default": "2022-05-29"
+          },
+          "id_category": {
+            "type": "string",
+            "default": "48f5ba49-5164-492a-8963-52ec42443908"
+          }
+        }
       }
     },
     "examples": {
@@ -152,6 +244,14 @@
           "name": "Jeanette Carter",
           "email": "jeanette@mail.com",
           "password": "123456",
+          "employed": true
+        }
+      },
+      "UserUpdateBody": {
+        "value": {
+          "name": "Cleiton Guerra",
+          "email": "cleitonguerra@mail.com",
+          "password": "Pass@1234",
           "employed": true
         }
       },
@@ -222,7 +322,89 @@
         "content": {
           "application/json": {
             "example": {
-              "error": "email already exists"
+              "error": "Key (field)=(field) already exists"
+            }
+          }
+        }
+      },
+      "NoContent": {
+        "description": "NoContent"
+      },
+      "Unauthorized": {
+        "description": "UNAUTHORIZED",
+        "content": {
+          "aplication/json": {
+            "examples": {
+              "Token not informed": {
+                "value": {
+                  "error": "missing authorization header"
+                }
+              },
+              "Invalid token": {
+                "value": {
+                  "error": "invalid token"
+                }
+              },
+              "Missing token": {
+                "value": {
+                  "error": "token missing"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "FORBIDDEN",
+        "content": {
+          "aplication/json": {
+            "example": {
+              "Token not informed": {
+                "value": {
+                  "error": "permission denied"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Success": {
+        "description": "SUCCESS",
+        "content": {
+          "aplication/json": {
+            "example": {
+              "SUCCESS": {
+                "value": {
+                  "ends_at": "YYYY-MM-DDTHH:MM:SS.MMMMZ",
+                  "starts_at": "YYYY-MM-DDTHH:MM:SS.MMMMZ",
+                  "description": "Aplicação usando o framework react e a biblioteca axios",
+                  "name": "Aplicação web com react e axios",
+                  "user_owner": {
+                    "id": "0ace079a-8dda-406d-a74f-ca823fc35236",
+                    "name": "Cleito Guerra",
+                    "email": "cleitonguerra@mail.com",
+                    "createdAt": "YYYY-MM-DDTHH:MM:SS.MMMMZ",
+                    "updatedAt": "YYYY-MM-DDTHH:MM:SS.MMMMZ",
+                    "employed": true
+                  },
+                  "id": "0ace079a-8dda-406d-a74f-ca823fc35236",
+                  "created_at": "YYYY-MM-DDTHH:MM:SS.MMMMZ"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ProjectBadRequest": {
+        "description": "BAD REQUEST",
+        "content": {
+          "application/json": {
+            "examples": {
+              "MissingFields": {
+                "value": {
+                  "error": ["<field_1> is required", "<field_2> is required"]
+                }
+              }
             }
           }
         }
