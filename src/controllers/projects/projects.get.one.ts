@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import httpStatus from 'http-status';
 import { handleError } from '../../errors';
 import { getOneProjectService } from '../../services/projects';
 
