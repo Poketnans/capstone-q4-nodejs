@@ -3,6 +3,7 @@ import UuidMalformedError from './uuidMalformed.error';
 import CategoryNotFoundError from './categoryNotFound.error';
 import ModeNotFoundError from './modeNotFound.error';
 import PeriodNotFoundError from './periodNotFound.error';
+import CourseTitleAlreadyRegisteredError from './courseTitleAlreadyRegistered.error';
 
 export {
   ErrorHandler,
@@ -11,4 +12,5 @@ export {
   CategoryNotFoundError,
   ModeNotFoundError,
   PeriodNotFoundError,
+  CourseTitleAlreadyRegisteredError,
 };
