@@ -5,17 +5,6 @@ import { Response, Request, NextFunction } from 'express';
 import userSchema from '../../../schemas/userCreate.schema';
 import { validateSchemaMiddleware } from '../../../middlewares';
 
-const testUserWrong = {
-  name: 'bruno',
-  email: 'bruno@gmail',
-  password: '12345',
-};
-const testUser = {
-  name: 'bruno',
-  email: 'bruno@gmail.com',
-  password: '12345',
-};
-
 describe('validadeSchemaMiddleware', () => {
   let mockReq: Partial<Request>;
   let mockRes: Partial<Response>;
@@ -29,39 +18,14 @@ describe('validadeSchemaMiddleware', () => {
     } as Partial<Response>;
   });
 
-  it('should be able of validate schema call return error while body undefined', async () => {
+  it('should be able to call next function just one time', async () => {
     await validateSchemaMiddleware(userSchema)(
       mockReq as Request,
       mockRes as Response,
       nextFx as NextFunction
     );
 
-    const expectedStatusCode = 400;
-    expect(mockRes.status).toBeCalledWith(expectedStatusCode);
-    const expectedJsonMessageError = { error: expect.anything() };
-    expect(mockRes.json).toBeCalledWith(expectedJsonMessageError);
-  });
-
-  it('should be able of validate schema call next function', async () => {
-    mockReq.body = testUser;
-    await validateSchemaMiddleware(userSchema)(
-      mockReq as Request,
-      mockRes as Response,
-      nextFx as NextFunction
-    );
+    expect(nextFx).toBeCalled();
     expect(nextFx).toBeCalledTimes(1);
-  });
-  it('should be able of validate schema call return error while email in invalid format', async () => {
-    mockReq.body = testUserWrong;
-    await validateSchemaMiddleware(userSchema)(
-      mockReq as Request,
-      mockRes as Response,
-      nextFx as NextFunction
-    );
-
-    const expectedStatusCode = 400;
-    expect(mockRes.status).toBeCalledWith(expectedStatusCode);
-    const expectedJsonMessageError = { error: 'format invalid for email.' };
-    expect(mockRes.json).toBeCalledWith(expectedJsonMessageError);
   });
 });
