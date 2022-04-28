@@ -1,5 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 import Course from '../../entities/Course';
+import { CourseTitleAlreadyRegisteredError } from '../../errors';
 import { ICourseRepo, ICourseUpdate, ICourseFindOne } from './interfaces';
 
 class CourseRepository implements ICourseRepo {
@@ -9,7 +10,13 @@ class CourseRepository implements ICourseRepo {
     this.ormRepository = getRepository(Course);
   }
 
-  saveCourse = (course: Course) => this.ormRepository.save(course);
+  saveCourse = async (course: Course) => {
+    try {
+      return await this.ormRepository.save(course);
+    } catch (error) {
+      throw new CourseTitleAlreadyRegisteredError();
+    }
+  };
 
   deleteOneCourse = (id: string) => this.ormRepository.delete(id);
 
