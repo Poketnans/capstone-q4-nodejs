@@ -15,7 +15,7 @@ class CourseRepository implements ICourseRepo {
 
   getCourses = () => this.ormRepository.find();
 
-  getOneOrFail = (id: string) => this.ormRepository.findOneOrFail(id);
+  getOneOrFail = (id: string, listRelations: string[]=[]) => this.ormRepository.findOneOrFail(id,{relations:listRelations});
 
   update = (id: string, updatedCourse: ICourseUpdate) =>
     this.ormRepository.update(id, updatedCourse);

@@ -9,7 +9,7 @@ import {
   createCourseController,
 } from '../controllers/courses';
 
-import { validateSchemaMiddleware, validateAuth } from '../middlewares';
+import { validateSchemaMiddleware, validateAuth, courseOwnerVerifyer } from '../middlewares';
 import { courseUpdateSchema } from '../schemas';
 
 const coursesRoutes = Router();
@@ -35,7 +35,8 @@ coursesRoutes.patch(
 
 coursesRoutes.delete(
   '/:uuid',
-  // será adicionado o middleware de auth
+  validateAuth,
+  courseOwnerVerifyer,
   DeleteCourseControler
 );
 
