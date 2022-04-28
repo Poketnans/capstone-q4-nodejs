@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
-import { ErrorHandler, handleError } from '../errors';
+import { ErrorHandler } from '../errors';
 import { ProjectRepository } from '../repositories';
 
 const projectPermissionMiddleware = async (
@@ -10,13 +10,9 @@ const projectPermissionMiddleware = async (
 ) => {
   const { user } = req;
   const { uuid: id } = req.params;
-  const targetProject = await new ProjectRepository().getOne(
-    id
-  );
+  const targetProject = await new ProjectRepository().getOne(id);
   if (targetProject.user_owner.id !== user.id) {
-    return next(
-        new ErrorHandler(httpStatus.UNAUTHORIZED, 'permission denied')
-    );
+    return next(new ErrorHandler(httpStatus.UNAUTHORIZED, 'permission denied'));
   }
   return next();
 };

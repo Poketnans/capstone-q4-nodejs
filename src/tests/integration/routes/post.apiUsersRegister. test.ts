@@ -46,8 +46,6 @@ describe('POST/api/users/register endpoint', () => {
       body: { name },
     };
 
-    console.log(send.body);
-
     const expected: IExpected<IErrorMessage> = {
       response: {
         error: 'email is a required field, password is a required field',
