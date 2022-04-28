@@ -2,6 +2,8 @@ import { getRepository, Repository } from 'typeorm';
 import User from '../../entities/User';
 import { IUserQuery, IUserRepo } from './interfaces';
 import { IUser } from '../../types/user';
+import { UserNotFoundError, UuidMalformedError } from '../../errors';
+import { verifyUuidError } from '../../utils';
 
 class UserRepository implements IUserRepo {
   private ormRepository: Repository<User>;
@@ -14,12 +16,23 @@ class UserRepository implements IUserRepo {
 
   getUsers = () => this.ormRepository.find();
 
+  getOneUser = async (userInfo: string, relations?: string[]) => {
+    try {
+      if (userInfo.includes('@')) {
+        return await this.ormRepository.findOneOrFail(
+          { email: userInfo },
+          { relations }
+        );
+      }
+      return await this.ormRepository.findOneOrFail(
+        { id: userInfo },
+        { relations }
+      );
+    } catch (err) {
+      verifyUuidError(err.message, 'jwt.user.id');
 
-  getOneUser = (userInfo: string, relations?: string[]) => {
-    if (userInfo.includes('@')) {
-      return this.ormRepository.findOne({ email: userInfo }, { relations });
+      throw new UserNotFoundError();
     }
-    return this.ormRepository.findOne({ id: userInfo }, { relations });
   };
 
   updateUser = (userUpdated: IUserQuery, id: string) =>
