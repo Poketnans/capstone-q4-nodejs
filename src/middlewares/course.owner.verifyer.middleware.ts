@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
-import { ErrorHandler, handleError } from '../errors';
+import { ErrorHandler } from '../errors';
 import { CourseRepository } from '../repositories';
 
 const courseOwnerVerifyer = async (
@@ -10,12 +10,9 @@ const courseOwnerVerifyer = async (
 ) => {
   const { user } = req;
   const { uuid: id } = req.params;
-  const targetCourse = await new CourseRepository().findOneOrFail({
-    id,
-  });
+  const targetCourse = await new CourseRepository().getOneOrFail(id);
   if (targetCourse.user_owner.id !== user.id) {
-    return next(new
-      ErrorHandler(httpStatus.UNAUTHORIZED,'permission denied'));
+    return next(new ErrorHandler(httpStatus.UNAUTHORIZED, 'permission denied'));
   }
   return next();
 };
