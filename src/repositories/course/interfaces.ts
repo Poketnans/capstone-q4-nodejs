@@ -22,7 +22,7 @@ interface ICourse {
   period: CoursePeriod;
   category: Category;
   user_owner: User;
-  certificate?: boolean;
+  certificate: boolean;
   reviews: [];
 }
 

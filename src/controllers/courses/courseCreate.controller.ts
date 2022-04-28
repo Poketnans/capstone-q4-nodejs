@@ -5,7 +5,8 @@ import createCourseService from '../../services/Course/createCourseService';
 
 const createCourseController = async (req: Request, res: Response) => {
   try {
-    const course = await createCourseService(req.validated);
+    const { id } = req.user;
+    const course = await createCourseService(id, req.validated);
     return res.status(httpStatus.CREATED).json(course);
   } catch (error) {
     return handleError(error, res);
