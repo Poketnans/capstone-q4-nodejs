@@ -10,6 +10,8 @@ class CourseModeRepository implements ICourseModeRepo {
   }
 
   getCourseModes = () => this.ormRepository.find();
+
+  getOneMode = (id: string) => this.ormRepository.findOne(id);
 }
 
 export default CourseModeRepository;
