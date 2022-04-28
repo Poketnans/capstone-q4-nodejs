@@ -26,7 +26,11 @@ const userRoutes = Router();
 userRoutes.get('/profile');
 userRoutes.patch('', validateSchemaMiddleware(updateUserSchema), updateUser);
 userRoutes.get('', getUsersController);
+<<<<<<< HEAD
 userRoutes.get('/:user_id', validateAuth, getOneController);
+=======
+
+>>>>>>> dc82e011e42ba0c07426538d1e3d08b147cb9e28
 userRoutes.post(
   '/register',
   validateSchemaMiddleware(userSchema),

@@ -7,7 +7,12 @@ import UserRepository from '../../repositories/user/user.repository';
 
 const loginController = async (req: Request, res: Response) => {
   const { email, password } = req.body;
+
   const user = await new UserRepository().getUserLogin(email);
+  
+  if(!user){
+    return res.status(httpStatus.NOT_FOUND).json({ "error" : "email ou password not found"  });
+  }
 
   const match = await bcrypt.compare(password, user.password);
 
