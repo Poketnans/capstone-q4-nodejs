@@ -8,6 +8,7 @@ declare global {
       token: string;
       imageInfo: any;
       user: IUser;
+      decoded: any;
     }
   }
 }
