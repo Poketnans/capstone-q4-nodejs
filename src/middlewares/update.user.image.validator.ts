@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import httpStatus from 'http-status';
-import { ErrorHandler, handleError } from '../errors';
+import { ErrorHandler } from '../errors';
 
 const updateUserImageValidator = (
   req: Request,
@@ -15,12 +15,11 @@ const updateUserImageValidator = (
   ];
 
   if (!allowedMimeTypes.includes(file.mimetype)) {
-    return handleError(
+    return next(
       new ErrorHandler(
         httpStatus.UNSUPPORTED_MEDIA_TYPE,
         `allowed mymetypes: ${allowedMimeTypes}, sended mimetype: ${file.mimetype}`
-      ),
-      res
+      )
     );
   }
   const imageInfo = {
