@@ -15,4 +15,5 @@ export interface ICourseReviewRepo {
     updateReview : (id: string, updatedReview: IReviewUpdate) => Promise<UpdateResult>;
     findOneOrFail : (id: string,listRelations: string[]) => Promise<CourseReview>;
     delete : (id: string) => Promise<DeleteResult>
+    saveReview : (courseReview: CourseReview) => Promise<CourseReview>
 }
