@@ -3,7 +3,6 @@ import loginController from '../controllers/User/login';
 import getUsersController from '../controllers/User/getAll';
 
 import { updateUserSchema, userSchema, loginSchema } from '../schemas';
-import loginController from "../controllers/User/login";
 
 import {
   updateUserImageValidator,
@@ -52,3 +51,4 @@ userRoutes.patch(
 
 
 export default userRoutes;
+
