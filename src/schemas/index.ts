@@ -9,8 +9,8 @@ export {
   userSchema,
   courseUpdateSchema,
   updateUserSchema,
-  userReviewUpdate,
   reviewSchema,
+  userReviewUpdate,
   createProjectSchema
 };
 

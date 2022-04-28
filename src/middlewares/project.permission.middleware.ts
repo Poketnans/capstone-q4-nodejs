@@ -10,18 +10,12 @@ const projectPermissionMiddleware = async (
 ) => {
   const { user } = req;
   const { uuid: id } = req.params;
-  const targetProject = await new ProjectRepository().getOne({
-    id,
-  });
+  const targetProject = await new ProjectRepository().getOne(
+    id
+  );
   if (targetProject.user_owner.id !== user.id) {
     return next(
-      handleError(
-        new ErrorHandler(
-          httpStatus.UNAUTHORIZED,
-          'permission denied'
-        ),
-        res
-      )
+        new ErrorHandler(httpStatus.UNAUTHORIZED, 'permission denied')
     );
   }
   return next();

@@ -17,20 +17,19 @@ describe('Integration route user create',() => {
 
   const baseUrlTest = "/users/register" 
     
-  it('should be able return error with body wrong',async () => {
+  
+  it('should be able return error with statusCode 400',async () => {
     
-    const response: Response = await 
+    const response = await 
     request(app)
       .post(baseUrlTest)
       .send(generateUser.newUserWrongEmail())
     
     const statusCodeExpected = 400 
-    expect(response.statusCode).toBe(statusCodeExpected)
-    const expecteMessageErrorEmail = {"error": "format invalid for email."} 
-    expect(response.body).toStrictEqual(expecteMessageErrorEmail)
-  
+    expect(response.statusCode).toBe(statusCodeExpected);
+   
   })
-
+  
   it('should de able return new json of new user and status code 201',async () => {
     
     const newUser = generateUser.newUser();

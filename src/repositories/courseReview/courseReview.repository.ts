@@ -9,13 +9,14 @@ class CourseReviewRepository implements ICourseReviewRepo {
     this.ormRepository = getRepository(CourseReview);
   }
 
+  saveReview = (courseReview: CourseReview) => this.ormRepository.save(courseReview);
+  
   delete = (id: string) => this.ormRepository.delete(id);
 
   updateReview = (id: string, updatedReview : IReviewUpdate) => this.ormRepository.update(id,updatedReview);
 
   findOneOrFail = (id: string, listRelations: string[] =[]) => this.ormRepository.findOneOrFail(id,{relations:listRelations})
 
-  saveReview = (review) => this.ormRepository.save(review);
 
 }
 
