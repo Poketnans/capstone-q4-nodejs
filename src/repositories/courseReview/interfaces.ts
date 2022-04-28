@@ -11,9 +11,18 @@ export interface IReviewUpdate{
     user?: User
 }
 
+export interface IReview{
+    comment: string;
+    rating: number;
+    hash_user_course: string;
+    course: Course;
+    user: User
+}
+
+
 export interface ICourseReviewRepo {
     updateReview : (id: string, updatedReview: IReviewUpdate) => Promise<UpdateResult>;
     findOneOrFail : (id: string,listRelations: string[]) => Promise<CourseReview>;
     delete : (id: string) => Promise<DeleteResult>
-    saveReview : (courseReview: CourseReview) => Promise<CourseReview>
+    saveReview : (courseReview: IReview) => Promise<CourseReview>
 }
