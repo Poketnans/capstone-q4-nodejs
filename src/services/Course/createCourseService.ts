@@ -13,7 +13,6 @@ import {
 
 const createCourseService = async (id: string, reqValidated: ICourse) => {
   try {
-    console.log(id);
     const courseValidated: ICourse = reqValidated;
 
     const courseOwner = await new UserRepository().getOneUser(id);

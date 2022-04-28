@@ -7,7 +7,6 @@ import UserRepository from '../../repositories/user/user.repository';
 
 const loginController = async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  console.log(email);
   const user = await new UserRepository().getUserLogin(email);
 
   const match = await bcrypt.compare(password, user.password);
