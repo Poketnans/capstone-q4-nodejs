@@ -24,7 +24,7 @@ const userRoutes = Router();
 
 userRoutes.get('/:user_id', validateAuth, getOneController);
 userRoutes.get('', getUsersController);
-userRoutes.post('/login', loginController);
+
 userRoutes.post(
   '/register',
   validateSchemaMiddleware(userSchema),
