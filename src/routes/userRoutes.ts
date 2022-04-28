@@ -36,7 +36,7 @@ userRoutes.post(
 );
 userRoutes.post('/signup');
 userRoutes.post('/logout');
-userRoutes.delete('/:uuid', validateAuth, deleteUserController);
+userRoutes.delete('', validateAuth, deleteUserController);
 
 userRoutes.patch('',validateAuth, validateSchemaMiddleware(updateUserSchema), updateUser);
 userRoutes.patch(

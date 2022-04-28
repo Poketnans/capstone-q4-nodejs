@@ -4,18 +4,18 @@ import { UserRepository } from '../../repositories';
 
 const deleteUserController = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const { uuid } = req.params;
+    const { user } = req;
 
-    const user = await new UserRepository().getOneUser(uuid);
+    const findUser = await new UserRepository().getOneUser(user.id);
 
-    if (!user) {
+    if (!findUser) {
       return res.status(404).json({
         message: 'User not found',
       });
     }
 
-    await new UserRepository().deleteUser(uuid);
-    return res.status(200).send();
+    await new UserRepository().deleteUser(user.id);
+    return res.status(204).json("");
   } catch (error) {
     return handleError(error, res);
   }
