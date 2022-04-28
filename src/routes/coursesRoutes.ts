@@ -27,8 +27,9 @@ coursesRoutes.post(
 );
 
 coursesRoutes.patch(
-  '/:id',
+  '/:uuid',
   validateAuth,
+  courseOwnerVerifyer,
   validateSchemaMiddleware(courseUpdateSchema),
   updateCourseController
 );
