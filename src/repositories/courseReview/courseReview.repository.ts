@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 import CourseReview from '../../entities/CourseReview';
-import { ICourseReviewRepo, IReviewUpdate } from './interfaces';
+import { ICourseReviewRepo, IReview, IReviewUpdate } from './interfaces';
 
 class CourseReviewRepository implements ICourseReviewRepo {
   private ormRepository: Repository<CourseReview>;
@@ -9,7 +9,7 @@ class CourseReviewRepository implements ICourseReviewRepo {
     this.ormRepository = getRepository(CourseReview);
   }
 
-  saveReview = (courseReview: CourseReview) => this.ormRepository.save(courseReview);
+  saveReview = (courseReview: IReview) => this.ormRepository.save(courseReview);
   
   delete = (id: string) => this.ormRepository.delete(id);
 
