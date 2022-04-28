@@ -5,10 +5,10 @@ import { CourseRepository } from "../../repositories";
 const DeleteCourseServices = async ( req: Request ) => {
   try {
     const { uuid } = req.params;
-    const objectFindId = {"id": uuid};
+    
     const courseRepoObject = new CourseRepository();
-    await courseRepoObject.findOneOrFail(objectFindId)
-    await courseRepoObject.deleteOneCourse(objectFindId)
+    await courseRepoObject.getOneOrFail(uuid)
+    await courseRepoObject.deleteOneCourse(uuid)
   } catch (e) {
     throw new ErrorHandler(400,`${e.message}`);
         
