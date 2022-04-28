@@ -39,9 +39,17 @@ const createCourseService = async (id: string, reqValidated: ICourse) => {
 
     return courseCreated;
   } catch (e: any) {
+    
     if (e instanceof QueryFailedError) {
-      throw new ErrorHandler(httpStatus.CONFLICT, `${e.driverError.detail}`);
+      
+      
+      if(e.driverError.detail && e.driverError.detail.includes("exists") ){
+        throw new ErrorHandler(httpStatus.CONFLICT, `${e.driverError.detail}`);
+      }
+      
+      throw new ErrorHandler(httpStatus.NOT_FOUND, `${e.message}`);
     }
+    
     throw new ErrorHandler(httpStatus.BAD_REQUEST, `${e.message}`);
   }
 };
