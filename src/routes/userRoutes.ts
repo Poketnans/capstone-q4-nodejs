@@ -21,7 +21,7 @@ import {
 
 const userRoutes = Router();
 userRoutes.get('/profile');
-userRoutes.patch('', validateSchemaMiddleware(updateUserSchema), updateUser);
+
 userRoutes.get('', getUsersController);
 userRoutes.get('/:user_id', validateAuth, getOneController);
 userRoutes.post(
@@ -38,7 +38,7 @@ userRoutes.post('/signup');
 userRoutes.post('/logout');
 userRoutes.delete('/:uuid', validateAuth, deleteUserController);
 
-userRoutes.patch('', validateSchemaMiddleware(updateUserSchema), updateUser);
+userRoutes.patch('',validateAuth, validateSchemaMiddleware(updateUserSchema), updateUser);
 userRoutes.patch(
   '/image',
   validateAuth,
