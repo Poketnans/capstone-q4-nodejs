@@ -34,7 +34,6 @@ userRoutes.post(
   validateSchemaMiddleware(loginSchema),
   loginController
 );
-userRoutes.post('/signup');
 userRoutes.post('/logout');
 userRoutes.delete('', validateAuth, deleteUserController);
 
