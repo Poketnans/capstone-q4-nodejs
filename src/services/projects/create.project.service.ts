@@ -27,7 +27,7 @@ const createProjectService = async (id: string, project: IProject) => {
     if (e instanceof QueryFailedError) {
       throw new ErrorHandler(httpStatus.CONFLICT, `${e.driverError.detail}`);
     }
-    throw new ErrorHandler(httpStatus.BAD_REQUEST, `${e.message}`);
+    throw e;
   }
 };
 
