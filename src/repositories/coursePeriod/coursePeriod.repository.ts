@@ -1,6 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 import CoursePeriod from '../../entities/CoursePeriod';
-import { PeriodNotFoundError, UuidMalformedError } from '../../errors';
+import { PeriodNotFoundError } from '../../errors';
+import { verifyUuidError } from '../../utils';
 import { ICoursePeriodRepo } from './interfaces';
 
 class CoursePeriodRepository implements ICoursePeriodRepo {
@@ -15,14 +16,9 @@ class CoursePeriodRepository implements ICoursePeriodRepo {
   getOnePeriod = async (id: string) => {
     try {
       return await this.ormRepository.findOneOrFail(id);
-    } catch (error) {
-      if (
-        (error.message as string).includes('invalid input syntax for type uuid')
-      ) {
-        throw new UuidMalformedError('id_period');
-      } else {
-        throw new PeriodNotFoundError();
-      }
+    } catch (err) {
+      verifyUuidError(err.message, 'id_period');
+      throw new PeriodNotFoundError();
     }
   };
 }
