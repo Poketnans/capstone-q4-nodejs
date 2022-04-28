@@ -39,16 +39,13 @@ describe('unit test for validate auth', () => {
     expect(nextFx).toBeCalled();
     expect(nextFx).toBeCalledTimes(1);
 
-    expect(mockReq).toHaveProperty('decoded');
-    expect(mockReq.decoded).toHaveProperty('user');
+    expect(mockReq).toHaveProperty('user');
 
     expect(true).toBe(true);
   });
 
   it('will return error message if missing token', () => {
-    mockReq.headers = {
-      authorization: '',
-    };
+    mockReq.headers = {};
 
     validateAuth(
       mockReq as Request,
