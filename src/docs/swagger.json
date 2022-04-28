@@ -65,6 +65,33 @@
         }
       }
     },
+    "/users/login":{
+      "post":{
+        "description":"Faz o login na aplicação",
+        "requestBody":{
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref":"#/components/schemas/UserLoginBody"
+              },
+              "examples": {
+                "UserLoginBody": {
+                  "$ref": "#/components/examples/UserLoginBody"
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {},
+              "example": {}
+          }
+        }
+      },
+      "responses": {
+        "200": {"$ref": "#/components/responses/JWTLogin"},
+        "400": { "$ref": "#/components/responses/BadRequest" }
+      }
+    }
+  },
     "/users": {
       "patch": {
         "description": "Rota responsável pelo update do usuário.",
@@ -178,6 +205,21 @@
           }
         }
       },
+      "UserLoginBody": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "jeanette@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456",
+            "minLength": 6
+          }
+        }
+      },
       "UserRegisterBody": {
         "type": "object",
         "required": ["name", "email", "password"],
@@ -248,9 +290,37 @@
             "default": "48f5ba49-5164-492a-8963-52ec42443908"
           }
         }
+      },
+      "UserReviewBody":{
+        "type": "object",
+        "required": ["id_reviewer", "id_course", "comment", "rating"],
+        "properties": {
+          "id_reviewer": {
+            "type": "string",
+            "example": "48f5ba49-5164-492a-8963-52ec42443908"
+          },
+          "id_course": {
+            "type": "string",
+            "example": "48f7ba49-5294-5c34-8063-52ab42426908"
+          },
+          "comment": {
+            "type": "string",
+            "example": "Muito bom, recomendo!!"
+          },
+          "rating": {
+            "type": "number",
+            "example": 4.9
+          }
       }
-    },
+    }
+  },
     "examples": {
+      "UserLoginBody": {
+        "value": {
+          "email": "simon@mail.com",
+          "password": "123456"
+        }
+      },
       "UserRegisterBody": {
         "value": {
           "name": "Simon Ziemann",
@@ -272,6 +342,14 @@
           "email": "cleitonguerra@mail.com",
           "password": "Pass@1234",
           "employed": true
+        }
+      },
+      "UserReviewBody": {
+        "value": {
+          "id_reviewer": "8912e76f-1e28-4e29-8ccf-97ec6556905e",
+          "id_course": "48f7ba49-5294-5c34-8063-52ab42426908",
+          "comment": "Adorei, muito bom!!",
+          "rating": 1.8
         }
       },
       "User": {
@@ -436,6 +514,20 @@
               "Unsuported media type sended": {
                 "value": {
                   "error": "allowed mymetypes: 'image/jpeg', 'image/png','image/svg+xml', sended mimetype: image/gif"
+                }
+              }
+            }
+          }
+        }
+      },
+      "JWTLogin": {
+        "description": "Retorna o JWT ao usuário",
+        "content" : {
+          "aplication/json": {
+            "examples": {
+              "Return the JWT": {
+                "value": {
+                  "auth_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
                 }
               }
             }
