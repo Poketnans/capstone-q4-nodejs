@@ -1,30 +1,54 @@
 import { Router } from 'express';
-import updateUserController from '../controllers/User/updateUser';
+import loginController from '../controllers/User/login';
 import getUsersController from '../controllers/User/getAll';
+
 import { updateUserSchema, userSchema, loginSchema } from '../schemas';
-import { validateAuth, validateSchemaMiddleware } from "../middlewares";
-import { createUserController, getOneController, deleteUserController } from "../controllers/User";
 import loginController from "../controllers/User/login";
+
+import {
+  updateUserImageValidator,
+  upload,
+  validateSchemaMiddleware,
+  validateAuth,
+} from '../middlewares';
+
+import {
+  updateUserImageController,
+  createUserController,
+  getOneController,
+  deleteUserController,
+  updateUser,
+} from '../controllers/User';
+
 
 const userRoutes = Router();
 
-userRoutes.get('/profile');
-userRoutes.patch(
-  '',
-  validateSchemaMiddleware(updateUserSchema),
-  updateUserController
-);
-userRoutes.get("", getUsersController);
-userRoutes.get("/:user_id", validateAuth, getOneController);
-userRoutes.post("/register",
+userRoutes.get('/:user_id', validateAuth, getOneController);
+userRoutes.get('', getUsersController);
+userRoutes.post('/login', loginController);
+userRoutes.post(
+  '/register',
   validateSchemaMiddleware(userSchema),
   createUserController
 );
+
 userRoutes.post("/login", 
   validateSchemaMiddleware(loginSchema),
   loginController);
+
 userRoutes.post("/signup");
 userRoutes.post("/logout");
 userRoutes.delete("/:uuid", validateAuth, deleteUserController);
+
+
+userRoutes.patch('', validateSchemaMiddleware(updateUserSchema), updateUser);
+userRoutes.patch(
+  '/image',
+  validateAuth,
+  upload.single('image'),
+  updateUserImageValidator,
+  updateUserImageController
+);
+
 
 export default userRoutes;
