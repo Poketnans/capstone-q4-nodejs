@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 import Project from '../../entities/Project';
-import { IProjectRepo, IProject } from './interfaces';
+import { IProject, IProjectRepo } from './interfaces';
 
 class ProjectRepository implements IProjectRepo {
   private ormRepository: Repository<Project>;
@@ -8,6 +8,9 @@ class ProjectRepository implements IProjectRepo {
   constructor() {
     this.ormRepository = getRepository(Project);
   }
+
+  update = (id: string, updatedProject: Partial<IProject>) =>
+    this.ormRepository.update(id, updatedProject);
   
   create = (project: IProject) => this.ormRepository.save(project);
 
