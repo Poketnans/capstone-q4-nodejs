@@ -1,10 +1,10 @@
 import { createConnection, getConnection } from 'typeorm';
+import ormconfig from '../../db';
 import { ITestConnection } from './interfaces';
-import ormconfigForTests from './ormconfigForTests';
 
 class connection {
   static connect = async () => {
-    await createConnection(ormconfigForTests);
+    await createConnection(ormconfig);
   };
 
   static create = async () => {

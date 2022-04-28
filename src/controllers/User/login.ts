@@ -19,13 +19,13 @@ const loginController = async (req: Request, res: Response) => {
   if (!match) {
     return res
       .status(httpStatus.UNAUTHORIZED)
-      .json({ message: 'Wrong email/password' });
+      .json({ error: 'invalid credentials' });
   }
   const token = jwt.sign({ user }, jwtConfig.secretKey, {
     expiresIn: jwtConfig.expiresIn,
   });
 
-  return res.status(httpStatus.CREATED).json({ token });
+  return res.status(httpStatus.OK).json({ token });
 };
 
 export default loginController;

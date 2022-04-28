@@ -1,4 +1,4 @@
-import { UpdateResult } from 'typeorm';
+import { DeleteResult, UpdateResult } from 'typeorm';
 import Course from '../../entities/Course';
 import CourseMode from '../../entities/CourseMode';
 import CoursePeriod from '../../entities/CoursePeriod';
@@ -26,6 +26,18 @@ interface ICourse {
   reviews: [];
 }
 
+interface ICourse {
+  title: string;
+  address: string;
+  // id_mode: string,
+  // id_period: string,
+  starts_at: Date;
+  ends_at: Date;
+  start_time: Date;
+  end_time: Date;
+  // id_category: string,
+  certificate: boolean;
+}
 interface ICourseFindOne {
   id: string;
 }

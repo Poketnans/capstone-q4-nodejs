@@ -26,14 +26,23 @@ export interface ITestUserRegisterPayload {
   name: string;
   email: string;
   password: string;
-  isAdm?: boolean;
+  employed?: boolean;
 }
 
 export interface ITestUserRegisterResponse {
   id: string;
   name: string;
   email: string;
-  isAdm: boolean;
+  employed: boolean;
+  profile_image: string;
+  createdAt: string;
+  updatedAt: string;
+  projects_participated_in: [];
+  own_projects: [];
+  followers: [];
+  following: [];
+  assigned_courses: [];
+  owned_courses: [];
 }
 
 interface ITokenMalformedError {

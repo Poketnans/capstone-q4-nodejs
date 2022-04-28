@@ -40,24 +40,23 @@ describe('POST/api/users/register endpoint', () => {
   });
 
   it('should validate wrong schema', async () => {
-    delete userRegisterPayload.email;
-    delete userRegisterPayload.password;
+    const { name } = userRegisterPayload;
 
-    const send: ISend<ITestUserRegisterPayload> = {
-      body: userRegisterPayload,
+    const send: ISend<Omit<ITestUserRegisterPayload, 'email' | 'password'>> = {
+      body: { name },
     };
 
     const expected: IExpected<IErrorMessage> = {
       response: {
-        error: ['email is a required field', 'password is a required field'],
+        error: 'email is a required field, password is a required field',
       },
-      statusCode: httpStatus.BAD_REQUEST,
+      statusCode: httpStatus.CONFLICT,
     };
 
     const { body, statusCode } = await fetchUsersRegister(send.body);
 
-    expect(statusCode).toBe(expected.statusCode);
     expect(body).toStrictEqual(expected.response);
+    expect(statusCode).toBe(expected.statusCode);
   });
 
   it('should validate unique email violation', async () => {
@@ -88,16 +87,29 @@ describe('POST/api/users/register endpoint', () => {
     };
 
     const expected: IExpected<ITestUserRegisterResponse> = {
-      response: { id: '', name, email: email.toLowerCase(), isAdm: false },
+      response: {
+        id: '',
+        name: '',
+        email: '',
+        employed: false,
+        profile_image: '',
+        createdAt: '',
+        updatedAt: '',
+        projects_participated_in: [],
+        own_projects: [],
+        followers: [],
+        following: [],
+        assigned_courses: [],
+        owned_courses: [],
+      },
       statusCode: httpStatus.CREATED,
     };
 
     const { body, statusCode } = await fetchUsersRegister(send.body);
 
-    removeUnmockableProps(body);
-    removeUnmockableProps(expected.response);
-
     expect(statusCode).toBe(expected.statusCode);
-    expect(body).toStrictEqual(expected.response);
+    expect(Object.keys(body).sort()).toStrictEqual(
+      Object.keys(expected.response).sort()
+    );
   });
 });
