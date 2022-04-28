@@ -9,10 +9,6 @@ export interface IProject {
   created_at: Date;
   starts_at: Date;
   ends_at: Date;
-
-}
-
-export interface IProjectRepo {
   id_user_owner?: string;
   id_category?: string;
   user_owner?: User;

@@ -9,7 +9,7 @@ class CourseReviewRepository implements ICourseReviewRepo {
     this.ormRepository = getRepository(CourseReview);
   }
 
-  saveReview = (review) => this.ormRepository.save(review);
+  saveReview = (courseReview: CourseReview) => this.ormRepository.save(courseReview);
   
   delete = (id: string) => this.ormRepository.delete(id);
 
@@ -17,7 +17,6 @@ class CourseReviewRepository implements ICourseReviewRepo {
 
   findOneOrFail = (id: string, listRelations: string[] =[]) => this.ormRepository.findOneOrFail(id,{relations:listRelations})
 
-  saveReview = (review) => this.ormRepository.save(review);
 
 }
 
