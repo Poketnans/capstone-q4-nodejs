@@ -6,8 +6,8 @@ import { CourseRepository } from "../../repositories";
 const courseGetOneServices =async (req: Request) => {
   try {
     
-    const { id } = req.params;
-    const findCourse = await new CourseRepository().getOneOrFail(id);
+    const { uuid:id } = req.params;
+    const findCourse = await new CourseRepository().getOneOrFail(id,['reviews']);
     return findCourse;
 
   } catch (e) {

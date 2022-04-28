@@ -4,7 +4,7 @@ import { ErrorHandler } from "../../errors";
 import { CourseRepository } from "../../repositories";
 
 const updateCourseService = async (req: Request) => {
-  const { id } = req.params;
+  const { uuid:id } = req.params;
   try {
     const objectCourseRepo = new CourseRepository();
     const updatedCourse = req.validated;

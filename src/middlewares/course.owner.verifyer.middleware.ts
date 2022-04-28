@@ -8,12 +8,19 @@ const courseOwnerVerifyer = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { user } = req;
-  const { uuid: id } = req.params;
-  const targetCourse = await new CourseRepository().getOneOrFail(id);
-  if (targetCourse.user_owner.id !== user.id) {
-    return next(new ErrorHandler(httpStatus.UNAUTHORIZED, 'permission denied'));
+  try {
+    const { user } = req;
+    const { uuid: id } = req.params;
+    
+    const targetCourse = await new CourseRepository().getOneOrFail(id,['user_owner']);
+    
+    if (targetCourse.user_owner.id !== user.id) {
+      return next(new ErrorHandler(httpStatus.UNAUTHORIZED, 'permission denied'));
+    }
+    return next();
+  } catch (e) {
+    
+    return next(new ErrorHandler(httpStatus.NOT_FOUND, `${e.message}`));
   }
-  return next();
 };
 export default courseOwnerVerifyer;
