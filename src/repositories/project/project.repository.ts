@@ -1,5 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 import Project from '../../entities/Project';
+import { ProjectNotFoundError } from '../../errors';
+import { verifyUuidError } from '../../utils';
 import { IProject, IProjectRepo } from './interfaces';
 
 class ProjectRepository implements IProjectRepo {
@@ -11,11 +13,28 @@ class ProjectRepository implements IProjectRepo {
 
   update = (id: string, updatedProject: Partial<IProject>) =>
     this.ormRepository.update(id, updatedProject);
-  
+
   create = (project: IProject) => this.ormRepository.save(project);
 
-  getOne = (id: string, relationsWanted?: string[]) =>
-    this.ormRepository.findOneOrFail(id, { relations: relationsWanted });
+  getOne = async (id: string, relationsWanted?: string[]) => {
+    try {
+      return await this.ormRepository.findOneOrFail(id, {
+        relations: relationsWanted,
+      });
+    } catch (err) {
+      verifyUuidError(err.message, 'url id_project');
+      throw new ProjectNotFoundError();
+    }
+  };
+
+  delete = async (id: string) => {
+    try {
+      return await this.ormRepository.delete(id);
+    } catch (err) {
+      verifyUuidError(err.message, 'url id_project');
+      throw new ProjectNotFoundError();
+    }
+  };
 }
 
 export default ProjectRepository;
