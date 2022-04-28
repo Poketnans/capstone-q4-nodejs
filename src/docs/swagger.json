@@ -66,8 +66,8 @@
       }
     },
     "/users/login":{
-      "post":{
-        "description":"Faz o login na aplicação",
+      "post": {
+        "description":"Loga o usuário na aplicação",
         "requestBody":{
           "content": {
             "aplication/json": {
@@ -79,11 +79,7 @@
                   "$ref": "#/components/examples/UserLoginBody"
                 }
               }
-            },
-            "multipart/form-data": {
-              "schema": {},
-              "example": {}
-          }
+            }
         }
       },
       "responses": {
@@ -136,6 +132,30 @@
         "responses": {
           "204": { "$ref": "#/components/responses/NoContent" },
           "415": { "$ref": "#/components/responses/UnsuportedMediaType" }
+        }
+      }
+    },
+    "/reviews": {
+      "post": {
+        "description": "Rota responsável pela criação de reviews",
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserReviewBody"
+              }
+            },
+            "examples": {
+              "UserUpdateBody": {
+                "$ref": "#/components/examples/UserReviewBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "$ref": "#/components/responses/Success" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
         }
       }
     },
