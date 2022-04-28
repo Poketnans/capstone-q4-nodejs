@@ -12,7 +12,7 @@ import {
 import Category from './Category';
 import CourseMode from './CourseMode';
 import CoursePeriod from './CoursePeriod';
-import Review from './CourseReview';
+import CourseReview from './CourseReview';
 import User from './User';
 
 @Entity('courses')
@@ -66,6 +66,7 @@ export default class Course {
   @JoinColumn({ name: 'id_category', referencedColumnName: 'id' })
   category: Category;
 
-  @OneToMany(() => Review, (userReview) => userReview.id)
+  @OneToMany(() => CourseReview, (userReview) => userReview.course)
+  @JoinColumn({})
   reviews: [];
 }

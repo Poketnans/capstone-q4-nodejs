@@ -17,7 +17,7 @@ const coursesRoutes = Router();
 coursesRoutes.get('', getCoursesController);
 // será adicionado o middleware de auth
 
-coursesRoutes.get('/:id', CourseGetOneControler);
+coursesRoutes.get('/:uuid', CourseGetOneControler);
 
 coursesRoutes.post(
   '',
