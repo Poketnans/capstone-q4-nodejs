@@ -1,9 +1,8 @@
-import httpStatus from 'http-status';
-import { ErrorHandler } from './error';
+import NotFoundError from './NotFound.error';
 
-class PeriodNotFoundError extends ErrorHandler {
+class PeriodNotFoundError extends NotFoundError {
   constructor() {
-    super(httpStatus.NOT_FOUND, 'course period not found');
+    super('course period not found');
   }
 }
 

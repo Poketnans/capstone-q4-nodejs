@@ -1,9 +1,8 @@
-import httpStatus from 'http-status';
-import { ErrorHandler } from './error';
+import NotFoundError from './NotFound.error';
 
-class CategoryNotFoundError extends ErrorHandler {
+class CategoryNotFoundError extends NotFoundError {
   constructor() {
-    super(httpStatus.NOT_FOUND, 'category not found');
+    super('category not found');
   }
 }
 

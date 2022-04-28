@@ -1,9 +1,8 @@
-import httpStatus from 'http-status';
-import { ErrorHandler } from './error';
+import NotFoundError from './NotFound.error';
 
-class ModeNotFoundError extends ErrorHandler {
+class ModeNotFoundError extends NotFoundError {
   constructor() {
-    super(httpStatus.NOT_FOUND, 'course mode not found');
+    super('course mode not found');
   }
 }
 
