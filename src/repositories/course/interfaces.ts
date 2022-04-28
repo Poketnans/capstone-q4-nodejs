@@ -46,7 +46,7 @@ interface ICourseUpdate {
 interface ICourseRepo {
   saveCourse: (course: Course) => Promise<Course>;
 
-  deleteOneCourse: (ObjectId: ICourseFindOne) => Promise<any>;
+  deleteOneCourse: (ObjectId: string) => Promise<any>;
 
   getCourses: () => Promise<Course[]>;
 
