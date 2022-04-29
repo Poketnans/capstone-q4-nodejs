@@ -18,8 +18,10 @@ import {
   deleteUserController,
   updateUser,
 } from '../controllers/User';
+import getUserImage from '../controllers/User/get.user.image';
 
 const userRoutes = Router();
+userRoutes.get('image/:uuid', getUserImage);
 
 userRoutes.get('', getUsersController);
 userRoutes.get('/:uuid', validateAuth, getOneController);
