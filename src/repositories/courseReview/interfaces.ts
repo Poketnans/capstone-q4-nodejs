@@ -17,6 +17,8 @@ export interface IReview {
   hash_user_course: string;
   course: Course;
   user: User;
+  user_id?: string;
+  course_id?: string;
 }
 
 export interface ICourseReviewRepo {
