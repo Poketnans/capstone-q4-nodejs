@@ -39,6 +39,9 @@ class CourseRepository implements ICourseRepo {
 
   update = (id: string, updatedCourse: ICourseUpdate) =>
     this.ormRepository.update(id, updatedCourse);
+
+  getOwnCourses = (userId: string) =>
+    this.ormRepository.find({ where: { user_owner: { id: userId } } });
 }
 
 export default CourseRepository;

@@ -61,6 +61,7 @@ interface ICourseRepo {
   deleteOneCourse: (id: string) => Promise<any>;
 
   getCourses: () => Promise<Course[]>;
+  getOwnCourses: (userId: string) => Promise<Course[]>;
 
   getOneOrFail: (id: string, listRelations: string[]) => Promise<Course>;
   update: (id: string, updatedCourse: ICourseUpdate) => Promise<UpdateResult>;

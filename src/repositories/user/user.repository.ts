@@ -4,6 +4,9 @@ import { IUserQuery, IUserRepo } from './interfaces';
 import { IUser } from '../../types/user';
 import { UserNotFoundError, UuidMalformedError } from '../../errors';
 import { verifyUuidError } from '../../utils';
+import CourseReviewRepository from '../courseReview/courseReview.repository';
+import ProjectRepository from '../project/project.repository';
+import CourseRepository from '../course/course.repository';
 
 class UserRepository implements IUserRepo {
   private ormRepository: Repository<User>;
@@ -40,7 +43,26 @@ class UserRepository implements IUserRepo {
 
   getUserLogin = (email: string) => this.ormRepository.findOne({ email });
 
-  deleteUser = (userId: string) => this.ormRepository.delete(userId);
+  deleteUser = async (id: string) => {
+    try {
+      const reviewRepo = new CourseReviewRepository();
+      const reviews = await reviewRepo.getReviews(id);
+      reviews.forEach((review) => reviewRepo.delete(review.id));
+
+      const projectRepo = new ProjectRepository();
+      const projects = await projectRepo.getProjects(id);
+      projects.forEach((project) => projectRepo.delete(project.id));
+
+      const courseRepo = new CourseRepository();
+      const courses = await courseRepo.getOwnCourses(id);
+      courses.forEach((course) => courseRepo.deleteOneCourse(course.id));
+
+      return await this.ormRepository.delete(id);
+    } catch (err) {
+      verifyUuidError(err.message, 'url id_review');
+      throw new UserNotFoundError();
+    }
+  };
 }
 
 export default UserRepository;

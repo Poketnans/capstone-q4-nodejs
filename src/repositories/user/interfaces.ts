@@ -1,4 +1,5 @@
 import { DeleteResult, UpdateResult } from 'typeorm';
+import Project from '../../entities/Project';
 
 interface IUser {
   id: string;

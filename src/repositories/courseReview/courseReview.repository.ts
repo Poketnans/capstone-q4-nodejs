@@ -42,6 +42,9 @@ class CourseReviewRepository implements ICourseReviewRepo {
       throw new ReviewNotFoundError();
     }
   };
+
+  getReviews = (userId: string) =>
+    this.ormRepository.find({ where: { user: { id: userId } } });
 }
 
 export default CourseReviewRepository;

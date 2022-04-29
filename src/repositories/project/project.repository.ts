@@ -35,6 +35,9 @@ class ProjectRepository implements IProjectRepo {
       throw new ProjectNotFoundError();
     }
   };
+
+  getProjects = (userId: string) =>
+    this.ormRepository.find({ where: { user_owner: { id: userId } } });
 }
 
 export default ProjectRepository;
