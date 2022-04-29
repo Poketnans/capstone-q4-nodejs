@@ -1,0 +1,559 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Sumé Free Share Documentation",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Dev Url"
+    },
+    {
+      "url": "https://sume-free-share.herokuapp.com",
+      "description": "Deploy Url"
+    }
+  ],
+  "paths": {
+    "/users/register": {
+      "post": {
+        "description": "Rota responsável pelo registro do usuário.",
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRegisterBody"
+              },
+              "examples": {
+                "UserRegisterBody": {
+                  "$ref": "#/components/examples/UserRegisterBody"
+                },
+                "UserRegisterBodyEmployed": {
+                  "$ref": "#/components/examples/UserRegisterBodyEmployed"
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {},
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "CREATED",
+            "content": {
+              "aplication/json": {
+                "schema": { "$ref": "#/components/schemas/User" },
+                "examples": {
+                  "User": {
+                    "$ref": "#/components/examples/User"
+                  },
+                  "UserEmployed": {
+                    "$ref": "#/components/examples/UserEmployed"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          }
+        }
+      }
+    },
+    "/users/login":{
+      "post": {
+        "description":"Loga o usuário na aplicação",
+        "requestBody":{
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref":"#/components/schemas/UserLoginBody"
+              },
+              "examples": {
+                "UserLoginBody": {
+                  "$ref": "#/components/examples/UserLoginBody"
+                }
+              }
+            }
+        }
+      },
+      "responses": {
+        "200": {"$ref": "#/components/responses/JWTLogin"},
+        "400": { "$ref": "#/components/responses/BadRequest" }
+      }
+    }
+  },
+    "/users": {
+      "patch": {
+        "description": "Rota responsável pelo update do usuário.",
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdateBody"
+              },
+              "examples": {
+                "UserUpdateBody": {
+                  "$ref": "#/components/examples/UserUpdateBody"
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {},
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "204": { "$ref": "#/components/responses/NoContent" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "409": { "$ref": "#/components/responses/Conflict" }
+        }
+      }
+    },
+    "/users/image": {
+      "patch": {
+        "requestBody": {
+          "content": {
+            "multipar/form-data": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": { "$ref": "#/components/responses/NoContent" },
+          "415": { "$ref": "#/components/responses/UnsuportedMediaType" }
+        }
+      }
+    },
+    "/reviews": {
+      "post": {
+        "description": "Rota responsável pela criação de reviews",
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserReviewBody"
+              }
+            },
+            "examples": {
+              "UserUpdateBody": {
+                "$ref": "#/components/examples/UserReviewBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "$ref": "#/components/responses/Success" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
+        }
+      }
+    },
+    "/project/:uuid": {
+      "post": {
+        "description": "Rota responsável pela criação de projetos",
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectRegisterBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "$ref": "#/components/responses/Success" },
+          "400": { "$ref": "#/components/responses/ProjectBadRequest" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "employed": {
+            "type": "boolean",
+            "default": false
+          },
+          "profile_image": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "projects_participated_in": {
+            "type": "array"
+          },
+          "own_projects": {
+            "type": "array"
+          },
+          "followers": {
+            "type": "array"
+          },
+          "following": {
+            "type": "array"
+          },
+          "assigned_courses": {
+            "type": "array"
+          },
+          "owned_courses": {
+            "type": "array"
+          }
+        }
+      },
+      "UserLoginBody": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "jeanette@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456",
+            "minLength": 6
+          }
+        }
+      },
+      "UserRegisterBody": {
+        "type": "object",
+        "required": ["name", "email", "password"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Jeanette Carter"
+          },
+          "email": {
+            "type": "string",
+            "example": "jeanette@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456",
+            "minLength": 6
+          },
+          "employed": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "UserUpdateBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Jeanne d'Arc"
+          },
+          "email": {
+            "type": "string",
+            "example": "jalter@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "Pass@1234",
+            "minLength": 6
+          },
+          "employed": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "ProjectRegisterBody": {
+        "type": "object",
+        "required": ["name", "email", "password"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Aplicação web com react e axios"
+          },
+          "description": {
+            "type": "string",
+            "example": "Aplicação usando o framework react e a biblioteca axios"
+          },
+          "starts_at": {
+            "type": "string",
+            "example": "2022-04-29"
+          },
+          "ends_at": {
+            "type": "string",
+            "default": "2022-05-29"
+          },
+          "id_category": {
+            "type": "string",
+            "default": "48f5ba49-5164-492a-8963-52ec42443908"
+          }
+        }
+      },
+      "UserReviewBody":{
+        "type": "object",
+        "required": ["id_reviewer", "id_course", "comment", "rating"],
+        "properties": {
+          "id_reviewer": {
+            "type": "string",
+            "example": "48f5ba49-5164-492a-8963-52ec42443908"
+          },
+          "id_course": {
+            "type": "string",
+            "example": "48f7ba49-5294-5c34-8063-52ab42426908"
+          },
+          "comment": {
+            "type": "string",
+            "example": "Muito bom, recomendo!!"
+          },
+          "rating": {
+            "type": "number",
+            "example": 4.9
+          }
+      }
+    }
+  },
+    "examples": {
+      "UserLoginBody": {
+        "value": {
+          "email": "simon@mail.com",
+          "password": "123456"
+        }
+      },
+      "UserRegisterBody": {
+        "value": {
+          "name": "Simon Ziemann",
+          "email": "simon@mail.com",
+          "password": "123456"
+        }
+      },
+      "UserRegisterBodyEmployed": {
+        "value": {
+          "name": "Jeanette Carter",
+          "email": "jeanette@mail.com",
+          "password": "123456",
+          "employed": true
+        }
+      },
+      "UserUpdateBody": {
+        "value": {
+          "name": "Cleiton Guerra",
+          "email": "cleitonguerra@mail.com",
+          "password": "Pass@1234",
+          "employed": true
+        }
+      },
+      "UserReviewBody": {
+        "value": {
+          "id_reviewer": "8912e76f-1e28-4e29-8ccf-97ec6556905e",
+          "id_course": "48f7ba49-5294-5c34-8063-52ab42426908",
+          "comment": "Adorei, muito bom!!",
+          "rating": 1.8
+        }
+      },
+      "User": {
+        "value": {
+          "id": "8912e76f-1e28-4e29-8ccf-97ec6556905e",
+          "name": "Simon Ziemann",
+          "email": "simon@mail.com",
+          "employed": false,
+          "profile_image": "https://image.ext",
+          "created_at": "date",
+          "updated_at": "date",
+          "projects_participated_in": [],
+          "own_projects": [],
+          "followers": [],
+          "following": [],
+          "assigned_courses": [],
+          "owned_courses": []
+        }
+      },
+      "UserEmployed": {
+        "value": {
+          "id": "0ace079a-8dda-406d-a74f-ca823fc35236",
+          "name": "Jeanette Carter",
+          "email": "jeanette@mail.com",
+          "employed": true,
+          "profile_image": "https://image.ext",
+          "created_at": "date",
+          "updated_at": "date",
+          "projects_participated_in": [],
+          "own_projects": [],
+          "followers": [],
+          "following": [],
+          "assigned_courses": [],
+          "owned_courses": []
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "BAD REQUEST",
+        "content": {
+          "application/json": {
+            "examples": {
+              "MissingFields": {
+                "value": {
+                  "error": {
+                    "error": ["<field_1> is required", "<field_2> is required"]
+                  }
+                }
+              },
+              "MalformedPassword": {
+                "value": {
+                  "error": "password must have min 6 chars"
+                }
+              },
+              "MalformedEmail": {
+                "value": {
+                  "error": "invalid email format"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "CONFLICT",
+        "content": {
+          "application/json": {
+            "example": {
+              "error": "Key (field)=(field) already exists"
+            }
+          }
+        }
+      },
+      "NoContent": {
+        "description": "NoContent"
+      },
+      "Unauthorized": {
+        "description": "UNAUTHORIZED",
+        "content": {
+          "aplication/json": {
+            "examples": {
+              "Token not informed": {
+                "value": {
+                  "error": "missing authorization header"
+                }
+              },
+              "Invalid token": {
+                "value": {
+                  "error": "invalid token"
+                }
+              },
+              "Missing token": {
+                "value": {
+                  "error": "token missing"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "FORBIDDEN",
+        "content": {
+          "aplication/json": {
+            "example": {
+              "Token not informed": {
+                "value": {
+                  "error": "permission denied"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Success": {
+        "description": "SUCCESS",
+        "content": {
+          "aplication/json": {
+            "example": {
+              "SUCCESS": {
+                "value": {
+                  "ends_at": "YYYY-MM-DDTHH:MM:SS.MMMMZ",
+                  "starts_at": "YYYY-MM-DDTHH:MM:SS.MMMMZ",
+                  "description": "Aplicação usando o framework react e a biblioteca axios",
+                  "name": "Aplicação web com react e axios",
+                  "user_owner": {
+                    "id": "0ace079a-8dda-406d-a74f-ca823fc35236",
+                    "name": "Cleito Guerra",
+                    "email": "cleitonguerra@mail.com",
+                    "createdAt": "YYYY-MM-DDTHH:MM:SS.MMMMZ",
+                    "updatedAt": "YYYY-MM-DDTHH:MM:SS.MMMMZ",
+                    "employed": true
+                  },
+                  "id": "0ace079a-8dda-406d-a74f-ca823fc35236",
+                  "created_at": "YYYY-MM-DDTHH:MM:SS.MMMMZ"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ProjectBadRequest": {
+        "description": "BAD REQUEST",
+        "content": {
+          "application/json": {
+            "examples": {
+              "MissingFields": {
+                "value": {
+                  "error": ["<field_1> is required", "<field_2> is required"]
+                }
+              }
+            }
+          }
+        }
+      },
+      "UnsuportedMediaType": {
+        "description": "UNSUPORTED MEDIA TYPE",
+        "content": {
+          "application/json": {
+            "examples": {
+              "Unsuported media type sended": {
+                "value": {
+                  "error": "allowed mymetypes: 'image/jpeg', 'image/png','image/svg+xml', sended mimetype: image/gif"
+                }
+              }
+            }
+          }
+        }
+      },
+      "JWTLogin": {
+        "description": "Retorna o JWT ao usuário",
+        "content" : {
+          "aplication/json": {
+            "examples": {
+              "Return the JWT": {
+                "value": {
+                  "auth_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

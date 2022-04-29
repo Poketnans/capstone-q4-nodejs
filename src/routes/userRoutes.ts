@@ -1,24 +1,55 @@
-import { Router } from "express"
-import getUsersController from "../controllers/User/getAll";
+import { Router } from 'express';
+import getUsersController from '../controllers/User/getAll';
 
-import { validateSchemaMiddleware } from "../middlewares";
-import { userSchema } from "../schemas";
-import { createUserController
-} from "../controllers/User";
+import { updateUserSchema, userSchema, loginSchema } from '../schemas';
+import loginController from '../controllers/User/login';
 
-const userRoutes = Router()
+import {
+  updateUserImageValidator,
+  upload,
+  validateSchemaMiddleware,
+  validateAuth,
+} from '../middlewares';
 
-userRoutes.get("", getUsersController)
-userRoutes.get("/profile")
-userRoutes.post("/register",
+import {
+  updateUserImageController,
+  createUserController,
+  getOneController,
+  deleteUserController,
+  updateUser,
+} from '../controllers/User';
+import getUserImage from '../controllers/User/get.user.image';
+
+const userRoutes = Router();
+userRoutes.get('/image/:uuid', validateAuth, getUserImage);
+
+userRoutes.get('', getUsersController);
+userRoutes.get('/:uuid', validateAuth, getOneController);
+userRoutes.post(
+  '/register',
   validateSchemaMiddleware(userSchema),
   createUserController
 );
-userRoutes.post("/login")
-userRoutes.post("/signup")
-userRoutes.post("/logout")
-userRoutes.patch("")
-userRoutes.delete("")
+userRoutes.post(
+  '/login',
+  validateSchemaMiddleware(loginSchema),
+  loginController
+);
+// userRoutes.post('/logout');
+userRoutes.delete('', validateAuth, deleteUserController);
 
+userRoutes.patch(
+  '',
+  validateAuth,
+  validateSchemaMiddleware(updateUserSchema),
+  updateUser
+);
+userRoutes.patch(
+  '/image',
+  validateAuth,
+  upload.single('image'),
+  updateUserImageValidator,
+  updateUserImageController
+);
 
-export default userRoutes
+export default userRoutes;

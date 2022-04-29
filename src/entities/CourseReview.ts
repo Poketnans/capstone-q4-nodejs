@@ -24,14 +24,14 @@ export default class CourseReview {
   @Column({ unique: true })
   hash_user_course: string;
 
-  @ManyToOne(() => Course)
+  @ManyToOne(() => Course, review=> review.reviews,{nullable: false})
   @JoinColumn({
     name: 'id_course',
     referencedColumnName: 'id',
   })
   course: Course;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { nullable: false })
   @JoinColumn({
     name: 'id_user',
     referencedColumnName: 'id',

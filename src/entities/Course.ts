@@ -12,7 +12,7 @@ import {
 import Category from './Category';
 import CourseMode from './CourseMode';
 import CoursePeriod from './CoursePeriod';
-import Review from './CourseReview';
+import CourseReview from './CourseReview';
 import User from './User';
 
 @Entity('courses')
@@ -38,31 +38,35 @@ export default class Course {
   @Column()
   end_time: Date;
 
+  @Column()
+  certificate: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { nullable: false })
   @JoinColumn({
     name: 'id_owner_course',
     referencedColumnName: 'id',
   })
-  user_owner: User[];
+  user_owner: User;
 
-  @ManyToOne(() => CourseMode)
+  @ManyToOne(() => CourseMode, { nullable: false })
   @JoinColumn({ name: 'id_mode', referencedColumnName: 'id' })
   mode: CourseMode;
 
-  @ManyToOne(() => CoursePeriod)
+  @ManyToOne(() => CoursePeriod, { nullable: false })
   @JoinColumn({ name: 'id_period', referencedColumnName: 'id' })
   period: CoursePeriod;
 
-  @ManyToOne(() => Category)
+  @ManyToOne(() => Category, { nullable: false })
   @JoinColumn({ name: 'id_category', referencedColumnName: 'id' })
-  category: Category[];
+  category: Category;
 
-  @OneToMany(() => Review, (userReview) => userReview.id)
+  @OneToMany(() => CourseReview, (userReview) => userReview.course)
+  @JoinColumn({})
   reviews: [];
 }

@@ -79,7 +79,7 @@ export default class User {
   @OneToMany(() => Course, (course) => course.user_owner)
   owned_courses: Course[];
 
-  @OneToOne(() => Image)
+  @OneToOne(() => Image, { nullable: false })
   @JoinColumn({ name: 'id_image', referencedColumnName: 'id' })
   image: Image;
 }

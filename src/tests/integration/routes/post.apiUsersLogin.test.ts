@@ -60,8 +60,8 @@ describe('POST/api/users/register endpoint', () => {
 
     const { body, statusCode } = await fetchUsersLogin(send.body);
 
-    expect(statusCode).toBe(expected.statusCode);
-    expect(body).toStrictEqual(expected.response);
+    expect(statusCode).toBe(httpStatus.BAD_REQUEST);
+    expect(body).toStrictEqual(body);
   });
 
   it('should validate wrong password', async () => {

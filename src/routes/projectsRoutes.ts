@@ -1,11 +1,40 @@
-import { Router } from "express"
+import { Router } from 'express';
+import updateProjectSchema from '../schemas/update.project.schema';
+import {
+  createProjecController,
+  deleteProjectController,
+  getOneProjectController,
+  updateProjectController,
+} from '../controllers/projects';
+import { createProjectSchema } from '../schemas';
+import {
+  validateAuth,
+  projectPermissionMiddleware,
+  validateSchemaMiddleware,
+} from '../middlewares';
 
-const projectsRoutes = Router()
+const projectsRoutes = Router();
 
-projectsRoutes.get("")
-projectsRoutes.get("/:uuid")
-projectsRoutes.post("")
-projectsRoutes.patch("")
-projectsRoutes.delete("")
+projectsRoutes.get('');
+projectsRoutes.get('/:uuid', validateAuth, getOneProjectController);
+projectsRoutes.post(
+  '',
+  validateAuth,
+  validateSchemaMiddleware(createProjectSchema),
+  createProjecController
+);
+projectsRoutes.patch(
+  '/:uuid',
+  validateAuth,
+  validateSchemaMiddleware(updateProjectSchema),
+  projectPermissionMiddleware,
+  updateProjectController
+);
+projectsRoutes.delete(
+  '/:uuid',
+  validateAuth,
+  projectPermissionMiddleware,
+  deleteProjectController
+);
 
-export default projectsRoutes
+export default projectsRoutes;

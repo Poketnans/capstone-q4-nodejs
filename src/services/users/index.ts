@@ -1,6 +1,5 @@
-import createUserService from "./userCreate.service";
+import createUserService from './userCreate.service';
+import getOneService from './getOne.service';
+import userUpdateImageService from './update.user.image.service';
 
-export {
-  // eslint-disable-next-line 
-    createUserService
-}
+export { createUserService, getOneService, userUpdateImageService };
