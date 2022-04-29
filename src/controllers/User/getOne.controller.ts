@@ -4,7 +4,10 @@ import getOneService from '../../services/users/getOne.service';
 
 const getOneController = async (req: Request, res: Response) => {
   try {
-    const userFounded = await getOneService(req.params.id);
+    const userFounded = await getOneService(req.params.uuid);
+
+    delete userFounded.password;
+
     return res.status(200).json(userFounded);
   } catch (e) {
     return handleError(e, res);

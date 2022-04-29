@@ -20,10 +20,9 @@ import {
 } from '../controllers/User';
 
 const userRoutes = Router();
-userRoutes.get('/profile');
 
 userRoutes.get('', getUsersController);
-userRoutes.get('/:user_id', validateAuth, getOneController);
+userRoutes.get('/:uuid', validateAuth, getOneController);
 userRoutes.post(
   '/register',
   validateSchemaMiddleware(userSchema),
@@ -34,10 +33,15 @@ userRoutes.post(
   validateSchemaMiddleware(loginSchema),
   loginController
 );
-userRoutes.post('/logout');
+// userRoutes.post('/logout');
 userRoutes.delete('', validateAuth, deleteUserController);
 
-userRoutes.patch('',validateAuth, validateSchemaMiddleware(updateUserSchema), updateUser);
+userRoutes.patch(
+  '',
+  validateAuth,
+  validateSchemaMiddleware(updateUserSchema),
+  updateUser
+);
 userRoutes.patch(
   '/image',
   validateAuth,
