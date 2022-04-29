@@ -11,7 +11,7 @@ dotenv.config();
 const createUserService = async (user: IUser) => {
   try {
     const imageInfo: IImage = {
-      mimetype: 'mimetype/png',
+      mimetype: 'image/png',
       name: 'default.png',
       binary: JSON.stringify(
         Buffer.from(
