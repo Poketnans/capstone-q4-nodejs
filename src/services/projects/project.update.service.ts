@@ -13,7 +13,7 @@ const updateProjectService = async (
     if (e instanceof QueryFailedError) {
       throw new ErrorHandler(400, `${e.driverError.detail}`);
     }
-    throw new ErrorHandler(400, `${e.message}`);
+    throw new ErrorHandler(401, `${e.message}`);
   }
 };
 

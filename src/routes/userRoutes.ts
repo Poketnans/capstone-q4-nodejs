@@ -21,10 +21,10 @@ import {
 import getUserImage from '../controllers/User/get.user.image';
 
 const userRoutes = Router();
-userRoutes.get("image/:uuid", getUserImage);
+userRoutes.get('/image/:uuid', validateAuth, getUserImage);
 
 userRoutes.get('', getUsersController);
-userRoutes.get('/:user_id', validateAuth, getOneController);
+userRoutes.get('/:uuid', validateAuth, getOneController);
 userRoutes.post(
   '/register',
   validateSchemaMiddleware(userSchema),
@@ -35,10 +35,15 @@ userRoutes.post(
   validateSchemaMiddleware(loginSchema),
   loginController
 );
-userRoutes.post('/logout');
+// userRoutes.post('/logout');
 userRoutes.delete('', validateAuth, deleteUserController);
 
-userRoutes.patch('',validateAuth, validateSchemaMiddleware(updateUserSchema), updateUser);
+userRoutes.patch(
+  '',
+  validateAuth,
+  validateSchemaMiddleware(updateUserSchema),
+  updateUser
+);
 userRoutes.patch(
   '/image',
   validateAuth,

@@ -5,6 +5,9 @@ import ModeNotFoundError from './modeNotFound.error';
 import PeriodNotFoundError from './periodNotFound.error';
 import CourseTitleAlreadyRegisteredError from './courseTitleAlreadyRegistered.error';
 import UserNotFoundError from './UserNotFound.error';
+import CourseNotFoundError from './courseNotFound.error';
+import CourseReviewAlreadyRegisteredError from './couseReviewAlreadyRegistered.error';
+import ProjectNotFoundError from './projectNotFound.error';
 
 export {
   ErrorHandler,
@@ -15,4 +18,7 @@ export {
   PeriodNotFoundError,
   CourseTitleAlreadyRegisteredError,
   UserNotFoundError,
+  CourseNotFoundError,
+  CourseReviewAlreadyRegisteredError,
+  ProjectNotFoundError,
 };

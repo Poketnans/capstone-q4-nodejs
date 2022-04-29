@@ -1,17 +1,18 @@
 import { Request, Response } from 'express';
-import { UserRepository } from '../../repositories';
+import httpStatus from 'http-status';
+import { ImageProfileRepository } from '../../repositories';
 
 const getUserImage = async (req: Request, res: Response) => {
   const { uuid } = req.params;
-  const user = await new UserRepository().getOneUser(uuid);
+  const image = await new ImageProfileRepository().getOneImage(uuid);
   const file = {
-    mimetype: user.image.mimetype,
-    binary: JSON.parse(user.image.binary),
+    mimetype: image.mimetype,
+    binary: Buffer.from(JSON.parse(image.binary), 'base64'),
   };
-  res.writeHead(200, {
+  res.writeHead(httpStatus.OK, {
     'Content-Type': file.mimetype,
   });
-  return res.end(JSON.parse(file.binary));
+  return res.end(file.binary);
 };
 
 export default getUserImage;

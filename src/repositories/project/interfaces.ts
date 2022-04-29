@@ -1,5 +1,6 @@
-import { UpdateResult } from 'typeorm';
+import { DeleteResult, UpdateResult } from 'typeorm';
 import Category from '../../entities/Category';
+import Project from '../../entities/Project';
 import User from '../../entities/User';
 
 export interface IProject {
@@ -20,6 +21,8 @@ export interface IProjectRepo {
     id: string,
     updatedProject: Partial<IProject>
   ) => Promise<UpdateResult>;
+  getProjects: (userId: string) => Promise<Project[]>;
   create: (project: IProject) => Promise<IProject>;
   getOne: (id: string, relations?: string[]) => Promise<IProject>;
+  delete: (id: string) => Promise<DeleteResult>;
 }
