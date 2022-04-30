@@ -12,14 +12,12 @@ const mockedUser = {
 
 describe('unit test for validate auth', () => {
   const mockReq: Partial<Request> = {};
-  let mockRes: Partial<Response> = {};
+  const mockRes: Partial<Response | any> = {};
   const nextFx: Partial<NextFunction | any> = jest.fn();
 
   beforeEach(() => {
-    mockRes = {
-      status: jest.fn().mockReturnValue(mockRes),
-      json: jest.fn().mockReturnValue(mockRes),
-    } as Partial<Response>;
+    mockRes.status = jest.fn().mockReturnValue(mockRes);
+    mockRes.json = jest.fn().mockReturnValue(mockRes);
   });
 
   it('will call next function and add key decoded on mockReq object', () => {
