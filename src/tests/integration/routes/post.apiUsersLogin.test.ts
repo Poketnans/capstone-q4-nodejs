@@ -1,5 +1,6 @@
 import {
   afterAll,
+  afterEach,
   beforeAll,
   beforeEach,
   describe,
@@ -26,19 +27,15 @@ describe('POST/api/users/register endpoint', () => {
   const fetchUsersLogin = (body = {}, headers = {}, times = 1) =>
     fetchData('post', endpoint, body, headers, times);
 
-  beforeAll(async () => {
-    await connection.create();
-  });
-
-  afterAll(async () => {
-    await connection.close();
-  });
-
   beforeEach(async () => {
-    await connection.clear();
+    await connection.create();
     userRegisterPayload = mocked.newUser();
 
     await fetchData('post', apiEndpoints.post.register, userRegisterPayload);
+  });
+
+  afterEach(async () => {
+    await connection.close();
   });
 
   /** WARNING - Ao ativar mais de um arquivo com seguências de conecção,
